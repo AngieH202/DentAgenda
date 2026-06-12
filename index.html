@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0077B6">
+<title>DentaAgenda</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#EAF4FB;min-height:100vh;color:#03045E}
+.app{max-width:430px;margin:0 auto;background:#fff;min-height:100vh;display:flex;flex-direction:column;box-shadow:0 0 24px rgba(0,119,182,0.1)}
+.topbar{background:linear-gradient(135deg,#0077B6,#00B4D8);padding:16px;display:flex;align-items:center;justify-content:space-between}
+.topbar-logo{display:flex;align-items:center;gap:10px}
+.topbar-logo svg{width:28px;height:28px;fill:#fff}
+.topbar h1{color:#fff;font-size:18px;font-weight:600;letter-spacing:.5px}
+.btn-logout{background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:12px;padding:6px 12px;border-radius:8px;cursor:pointer}
+.screen{display:none;flex:1;flex-direction:column}
+.screen.active{display:flex}
+.login-bg{background:linear-gradient(160deg,#0077B6 0%,#00B4D8 50%,#EAF4FB 100%);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px}
+.login-logo{text-align:center;margin-bottom:32px}
+.login-logo svg{width:56px;height:56px;fill:#fff;margin-bottom:10px}
+.login-logo h1{color:#fff;font-size:26px;font-weight:700;letter-spacing:1px}
+.login-logo p{color:rgba(255,255,255,0.8);font-size:13px;margin-top:4px}
+.login-card{background:#fff;border-radius:20px;padding:24px;width:100%;box-shadow:0 8px 32px rgba(0,119,182,0.15)}
+.role-tabs{display:flex;flex-direction:column;gap:12px;margin-bottom:8px}
+.role-tab{padding:14px;border:2px solid #e0f0f8;border-radius:12px;background:#fff;color:#0077B6;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
+.role-tab:hover{background:#f0f9ff;border-color:#0077B6}
+.form-group{margin-bottom:14px}
+.form-group label{font-size:13px;color:#023E8A;font-weight:500;display:block;margin-bottom:5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid #cae5f5;border-radius:10px;font-size:14px;color:#03045E;background:#f8fbff;outline:none;transition:border .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#0077B6;background:#fff}
+.form-group textarea{resize:none;height:72px}
+.btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;letter-spacing:.3px;transition:opacity .2s}
+.btn-primary:active{opacity:.85}
+.scroll-area{overflow-y:auto;flex:1;padding:16px}
+.section-title{font-size:11px;font-weight:700;color:#00B4D8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.card{background:#fff;border:1px solid #cae5f5;border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,119,182,0.06)}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- PANTALLA 1: SELECCIÓN DE ROL -->
+  <div class="screen active" id="screen-roles">
+    <div class="login-bg">
+      <div class="login-logo">
+        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4M12,18C8.69,18 6,15.31 6,12C6,10.07 6.91,8.36 8.34,7.26L9.76,8.68C8.68,9.45 8,10.64 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12C16,10.64 15.32,9.45 14.24,8.68L15.66,7.26C17.09,8.36 18,10.07 18,12C18,15.31 15.31,18 12,18Z"/></svg>
+        <h1>DentaAgenda</h1>
+        <p>Gestión Odontológica Eficiente</p>
+      </div>
+
+      <div class="login-card">
+        <div class="role-tabs">
+          <div class="role-tab" id="btn-elegir-paciente">Soy Paciente</div>
+          <div class="role-tab" id="btn-elegir-dentista">Soy Dentista</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANTALLA 2: REGISTRO / LLENADO DE DATOS PACIENTE -->
+  <div class="screen" id="screen-datos-paciente">
+    <div class="topbar">
+      <div class="topbar-logo">
+        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4M12,18C8.69,18 6,15.31 6,12C6,10.07 6.91,8.36 8.34,7.26L9.76,8.68C8.68,9.45 8,10.64 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12C16,10.64 15.32,9.45 14.24,8.68L15.66,7.26C17.09,8.36 18,10.07 18,12C18,15.31 15.31,18 12,18Z"/></svg>
+        <h1>Mis Datos</h1>
+      </div>
+      <button class="btn-logout" id="btn-salir">Salir</button>
+    </div>
+
+    <div class="scroll-area">
+      <div class="card">
+        <p class="section-title">Información Personal</p>
+        
+        <form id="form-registro-paciente">
+          <div class="form-group">
+            <label>Nombre Completo</label>
+            <input type="text" placeholder="Juan Pérez" required>
+          </div>
+
+          <div class="form-group">
+            <label>Número de Identidad (ID)</label>
+            <input type="text" placeholder="0801-1995-01234" required>
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono de Contacto (Honduras)</label>
+            <input type="tel" placeholder="+504 9999-9999" pattern="(\+504\s?)?[23789]\d{3}-?\d{4}" title="Debe introducir un número válido de Honduras, ej: +504 9999-9999 o 8888-8888" required>
+          </div>
+
+          <div class="form-group">
+            <label>Motivo de la Consulta</label>
+            <select required>
+              <option value="" disabled selected>Seleccione una opción</option>
+              <option value="limpieza">Limpieza Dental</option>
+              <option value="revision">Revisión General / Diagnóstico</option>
+              <option value="dolor">Dolor / Emergencia</option>
+              <option value="ortodoncia">Ortodoncia (Brackets)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Notas Adicionales / Síntomas</label>
+            <textarea placeholder="Describe brevemente si tienes dolor, alergias o alguna condición médica..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">Guardar y Continuar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const screenRoles = document.getElementById('screen-roles');
+const screenDatosPaciente = document.getElementById('screen-datos-paciente');
+
+// Al presionar "Soy Paciente" cambia de pantalla directo
+document.getElementById('btn-elegir-paciente').addEventListener('click', () => {
+  screenRoles.classList.remove('active');
+  screenDatosPaciente.classList.add('active');
+});
+
+// Al presionar "Soy Dentista" (Temporal: alerta hasta crear su vista)
+document.getElementById('btn-elegir-dentista').addEventListener('click', () => {
+  alert('¡Ingreso como Dentista! Próximamente se mostrará el panel de control.');
+});
+
+// Botón salir para regresar a la pantalla principal
+document.getElementById('btn-salir').addEventListener('click', () => {
+  screenDatosPaciente.classList.remove('active');
+  screenRoles.classList.add('active');
+  document.getElementById('form-registro-paciente').reset();
+});
+
+// Guardar el formulario de paciente
+document.getElementById('form-registro-paciente').addEventListener('submit', (e) => {
+  e.preventDefault();
+  alert('¡Datos del paciente guardados con éxito!');
+});
+</script>
+
+</body>
+</html>
