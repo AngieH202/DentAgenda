@@ -22,123 +22,258 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .login-logo h1{color:#fff;font-size:26px;font-weight:700;letter-spacing:1px}
 .login-logo p{color:rgba(255,255,255,0.8);font-size:13px;margin-top:4px}
 .login-card{background:#fff;border-radius:20px;padding:24px;width:100%;box-shadow:0 8px 32px rgba(0,119,182,0.15)}
-.role-tabs{display:flex;flex-direction:column;gap:12px;margin-bottom:8px}
-.role-tab{padding:14px;border:2px solid #e0f0f8;border-radius:12px;background:#fff;color:#0077B6;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
-.role-tab:hover{background:#f0f9ff;border-color:#0077B6}
+.role-tabs{display:flex;gap:8px;margin-bottom:20px}
+.role-tab{flex:1;padding:10px;border:2px solid #e0f0f8;border-radius:12px;background:#fff;color:#0077B6;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;text-align:center}
+.role-tab.active{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border-color:transparent}
+.login-form{display:none}
+.login-form.active{display:block}
 .form-group{margin-bottom:14px}
 .form-group label{font-size:13px;color:#023E8A;font-weight:500;display:block;margin-bottom:5px}
-.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid #cae5f5;border-radius:10px;font-size:14px;color:#03045E;background:#f8fbff;outline:none;transition:border .2s}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#0077B6;background:#fff}
+.form-group input,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid #cae5f5;border-radius:10px;font-size:14px;color:#03045E;background:#f8fbff;outline:none;transition:border .2s}
+.form-group input:focus,.form-group textarea:focus{border-color:#0077B6;background:#fff}
 .form-group textarea{resize:none;height:72px}
 .btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;letter-spacing:.3px;transition:opacity .2s}
 .btn-primary:active{opacity:.85}
+.error-msg{background:#fff0f0;border:1px solid #ffcccc;color:#c0392b;font-size:13px;padding:10px 12px;border-radius:8px;margin-bottom:12px;display:none}
+.nav-switch{display:flex;border-bottom:2px solid #e0f0f8}
+.nav-switch button{flex:1;padding:12px 8px;border:none;background:transparent;color:#0077B6;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.nav-switch button.active{color:#0077B6;border-bottom-color:#0077B6;font-weight:700}
 .scroll-area{overflow-y:auto;flex:1;padding:16px}
 .section-title{font-size:11px;font-weight:700;color:#00B4D8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.stat{background:linear-gradient(135deg,#f0f9ff,#e0f4fb);border-radius:12px;padding:14px;text-align:center;border:1px solid #cae5f5}
+.stat .num{font-size:24px;font-weight:700;color:#0077B6}
+.stat .lbl{font-size:11px;color:#0096C7;margin-top:2px;font-weight:500}
 .card{background:#fff;border:1px solid #cae5f5;border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,119,182,0.06)}
+.cita-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f0f9ff}
+.cita-row:last-child{border-bottom:none;padding-bottom:0}
+.hora-badge{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;font-size:12px;font-weight:600;padding:4px 8px;border-radius:8px;min-width:52px;text-align:center;margin-top:2px}
+.cita-info{flex:1}
+.cita-nombre{font-size:14px;font-weight:600;color:#03045E}
+.cita-motivo{font-size:12px;color:#0096C7;margin-top:1px}
+.badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
+.badge.pendiente{background:#fff3cd;color:#856404}
+.badge.confirmada{background:#d0f0fd;color:#0077B6}
+.badge.atendida{background:#d1fae5;color:#065f46}
+.badge.cancelada{background:#fee2e2;color:#991b1b}
+.badge.nopresento{background:#f3f4f6;color:#6b7280}
+.action-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.btn-sm{font-size:12px;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600;transition:opacity .2s}
+.btn-sm:active{opacity:.75}
+.btn-atendida{background:#d1fae5;color:#065f46}
+.btn-nopresento{background:#f3f4f6;color:#6b7280}
+.btn-confirmar{background:#d0f0fd;color:#0077B6}
+.btn-rechazar{background:#fee2e2;color:#991b1b}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0077B6,#00B4D8);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.exp-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid #f0f9ff}
+.exp-row:last-child{border-bottom:none}
+.exp-row span:first-child{color:#0096C7;font-weight:500}
+.exp-row span:last-child{color:#03045E;font-weight:600}
+.exp-nota{background:#f0f9ff;border-radius:8px;padding:10px;font-size:12px;color:#0077B6;margin-top:8px;border-left:3px solid #00B4D8}
+.horarios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.slot{padding:11px 6px;border:1.5px solid #cae5f5;border-radius:10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:#0077B6;background:#f8fbff;transition:all .2s}
+.slot.libre:hover{border-color:#0077B6;background:#e0f4fb}
+.slot.seleccionado{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border-color:transparent}
+.slot.ocupado{background:#f3f4f6;color:#adb5bd;cursor:not-allowed;font-weight:400;text-decoration:line-through}
+.step-bar{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid #e0f0f8;background:#f8fbff}
+.step-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#adb5bd;font-weight:500}
+.step-item.active{color:#0077B6;font-weight:700}
+.step-dot{width:22px;height:22px;border-radius:50%;background:#e0f0f8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#adb5bd}
+.step-item.active .step-dot{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff}
+.step-line{flex:1;height:1.5px;background:#e0f0f8;margin:0 4px}
+.confirm-box{background:linear-gradient(135deg,#f0f9ff,#e0f4fb);border:1.5px solid #00B4D8;border-radius:16px;padding:24px;text-align:center}
+.confirm-icon{width:56px;height:56px;background:linear-gradient(135deg,#0077B6,#00B4D8);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.confirm-icon svg{width:28px;height:28px;fill:#fff}
+.confirm-title{font-size:17px;font-weight:700;color:#03045E;margin-bottom:6px}
+.confirm-sub{font-size:13px;color:#0096C7;margin-bottom:16px}
+.confirm-detail{background:#fff;border-radius:10px;padding:12px;text-align:left;font-size:13px;color:#03045E;border:1px solid #cae5f5}
+.confirm-detail div{padding:4px 0;display:flex;gap:8px}
+.confirm-detail span:first-child{color:#0096C7;font-weight:500;min-width:60px}
+.slot-resumen{background:linear-gradient(135deg,#f0f9ff,#e0f4fb);border-radius:10px;padding:12px 14px;margin-bottom:16px;border:1px solid #cae5f5}
+.slot-resumen small{font-size:11px;color:#0096C7;font-weight:500}
+.slot-resumen strong{display:block;font-size:15px;color:#0077B6;font-weight:700;margin-top:2px}
+.empty-state{text-align:center;padding:40px 16px;color:#adb5bd}
+.empty-icon{font-size:40px;margin-bottom:8px}
+.empty-state p{font-size:14px}
+.btn-secondary{width:100%;padding:11px;background:transparent;color:#0077B6;border:1.5px solid #cae5f5;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;transition:background .2s}
+.btn-secondary:hover{background:#f0f9ff}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.pstep{display:none}
+.pstep.active{display:block}
+.notif{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#03045E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.notif.show{opacity:1}
 </style>
 </head>
 <body>
-
 <div class="app">
-  <!-- PANTALLA 1: SELECCIÓN DE ROL -->
-  <div class="screen active" id="screen-roles">
-    <div class="login-bg">
-      <div class="login-logo">
-        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4M12,18C8.69,18 6,15.31 6,12C6,10.07 6.91,8.36 8.34,7.26L9.76,8.68C8.68,9.45 8,10.64 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12C16,10.64 15.32,9.45 14.24,8.68L15.66,7.26C17.09,8.36 18,10.07 18,12C18,15.31 15.31,18 12,18Z"/></svg>
-        <h1>DentaAgenda</h1>
-        <p>Gestión Odontológica Eficiente</p>
-      </div>
-
-      <div class="login-card">
-        <div class="role-tabs">
-          <div class="role-tab" id="btn-elegir-paciente">Soy Paciente</div>
-          <div class="role-tab" id="btn-elegir-dentista">Soy Dentista</div>
-        </div>
-      </div>
+<div id="notif" class="notif"></div>
+<div id="screen-login" class="screen active">
+  <div class="login-bg">
+    <div class="login-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
+      <h1>DentaAgenda</h1>
+      <p>Sistema de citas odontológicas</p>
     </div>
-  </div>
-
-  <!-- PANTALLA 2: REGISTRO / LLENADO DE DATOS PACIENTE -->
-  <div class="screen" id="screen-datos-paciente">
-    <div class="topbar">
-      <div class="topbar-logo">
-        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4M12,18C8.69,18 6,15.31 6,12C6,10.07 6.91,8.36 8.34,7.26L9.76,8.68C8.68,9.45 8,10.64 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12C16,10.64 15.32,9.45 14.24,8.68L15.66,7.26C17.09,8.36 18,10.07 18,12C18,15.31 15.31,18 12,18Z"/></svg>
-        <h1>Mis Datos</h1>
+    <div class="login-card">
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="setRole('doctora')">&#9673; Soy doctora</button>
+        <button class="role-tab" onclick="setRole('paciente')">&#9786; Soy paciente</button>
       </div>
-      <button class="btn-logout" id="btn-salir">Salir</button>
-    </div>
-
-    <div class="scroll-area">
-      <div class="card">
-        <p class="section-title">Información Personal</p>
-        
-        <form id="form-registro-paciente">
-          <div class="form-group">
-            <label>Nombre Completo</label>
-            <input type="text" placeholder="Juan Pérez" required>
-          </div>
-
-          <div class="form-group">
-            <label>Número de Identidad (ID)</label>
-            <input type="text" placeholder="0801-1995-01234" required>
-          </div>
-
-          <div class="form-group">
-            <label>Teléfono de Contacto (Honduras)</label>
-            <input type="tel" placeholder="+504 9999-9999" pattern="(\+504\s?)?[23789]\d{3}-?\d{4}" title="Debe introducir un número válido de Honduras, ej: +504 9999-9999 o 8888-8888" required>
-          </div>
-
-          <div class="form-group">
-            <label>Motivo de la Consulta</label>
-            <select required>
-              <option value="" disabled selected>Seleccione una opción</option>
-              <option value="limpieza">Limpieza Dental</option>
-              <option value="revision">Revisión General / Diagnóstico</option>
-              <option value="dolor">Dolor / Emergencia</option>
-              <option value="ortodoncia">Ortodoncia (Brackets)</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Notas Adicionales / Síntomas</label>
-            <textarea placeholder="Describe brevemente si tienes dolor, alergias o alguna condición médica..."></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary">Guardar y Continuar</button>
-        </form>
+      <div id="form-error" class="error-msg"></div>
+      <div id="login-doctora" class="login-form active">
+        <div class="form-group"><label>Usuario</label><input type="text" id="d-user" placeholder="dra.belkis"></div>
+        <div class="form-group"><label>Contraseña</label><input type="password" id="d-pass" placeholder="••••••••"></div>
+        <button class="btn-primary" onclick="loginDoctora()">Ingresar</button>
+      </div>
+      <div id="login-paciente" class="login-form">
+        <div class="form-group"><label>Nombre completo</label><input type="text" id="p-reg-nombre" placeholder="Ej: María López"></div>
+        <div class="form-group"><label>Número de identidad</label><input type="text" id="p-reg-id" placeholder="Ej: 0801-1990-12345"></div>
+        <div class="form-group"><label>Edad</label><input type="number" id="p-reg-edad" placeholder="Ej: 34" min="1" max="120"></div>
+        <div class="form-group"><label>Teléfono</label><input type="tel" id="p-reg-tel" placeholder="Ej: 9876-5432"></div>
+        <button class="btn-primary" onclick="loginPaciente()">Continuar</button>
       </div>
     </div>
   </div>
 </div>
-
+<div id="screen-doctora" class="screen">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
+      <h1>DentaAgenda</h1>
+    </div>
+    <button class="btn-logout" onclick="logout()">Salir</button>
+  </div>
+  <div class="nav-switch">
+    <button class="active" onclick="switchTab('hoy')">Agenda</button>
+    <button onclick="switchTab('pendientes')">Pendientes <span id="pend-count" style="background:#fff3cd;color:#856404;border-radius:20px;padding:1px 6px;font-size:10px;font-weight:700"></span></button>
+    <button onclick="switchTab('expedientes')">Expedientes</button>
+  </div>
+  <div class="scroll-area">
+    <div id="tab-hoy" class="tab-panel active">
+      <div class="stats-grid" id="stats-grid"></div>
+      <div class="section-title">Agenda del día</div>
+      <div class="card" id="citas-lista"></div>
+    </div>
+    <div id="tab-pendientes" class="tab-panel">
+      <div class="section-title">Solicitudes pendientes de confirmación</div>
+      <div id="pendientes-lista"></div>
+    </div>
+    <div id="tab-expedientes" class="tab-panel">
+      <div class="section-title">Buscar paciente</div>
+      <div class="form-group"><input type="text" id="buscar-exp" placeholder="Buscar por nombre o número de identidad..." oninput="filtrarExpedientes(this.value)"></div>
+      <div id="expedientes-lista"></div>
+    </div>
+  </div>
+</div>
+<div id="screen-paciente" class="screen">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
+      <h1>DentaAgenda</h1>
+    </div>
+    <button class="btn-logout" onclick="logout()">Salir</button>
+  </div>
+  <div class="step-bar">
+    <div class="step-item active" id="si1"><div class="step-dot">1</div><span>Horario</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" id="si2"><div class="step-dot">2</div><span>Datos</span></div>
+    <div class="step-line"></div>
+    <div class="step-item" id="si3"><div class="step-dot">3</div><span>Confirmación</span></div>
+  </div>
+  <div class="scroll-area">
+    <div id="pstep-1" class="pstep active">
+      <div class="section-title">Seleccioná un horario disponible</div>
+      <p style="font-size:13px;color:#0096C7;margin-bottom:14px">Clínica Dra. Belkis Suisse</p>
+      <div class="horarios-grid" id="horarios-grid"></div>
+      <p id="slot-err" style="font-size:12px;color:#c0392b;display:none;margin-bottom:10px">Por favor seleccioná un horario.</p>
+      <button class="btn-primary" onclick="irPaso2()">Continuar &rarr;</button>
+    </div>
+    <div id="pstep-2" class="pstep">
+      <div id="slot-resumen" class="slot-resumen"></div>
+      <div class="section-title">Confirmá tus datos</div>
+      <div class="form-group"><label>Nombre completo</label><input type="text" id="cf-nombre" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
+      <div class="form-group"><label>Número de identidad</label><input type="text" id="cf-id" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
+      <div class="form-group"><label>Edad</label><input type="text" id="cf-edad" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
+      <div class="form-group"><label>Teléfono</label><input type="text" id="cf-tel" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
+      <div class="form-group"><label>Motivo de consulta</label><textarea id="cf-motivo" placeholder="Ej: Dolor de muela, limpieza, revisión..."></textarea></div>
+      <p id="motivo-err" style="font-size:12px;color:#c0392b;display:none;margin-bottom:10px">Por favor describí el motivo de tu consulta.</p>
+      <button class="btn-primary" onclick="enviarSolicitud()">Enviar solicitud</button>
+      <button class="btn-secondary" onclick="irPaso1()">&larr; Cambiar horario</button>
+    </div>
+    <div id="pstep-3" class="pstep">
+      <div class="confirm-box">
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </div>
+        <div class="confirm-title">¡Solicitud enviada!</div>
+        <div class="confirm-sub">Tu cita está pendiente de confirmación por la doctora.</div>
+        <div class="confirm-detail" id="confirm-detail"></div>
+      </div>
+      <button class="btn-primary" style="margin-top:16px" onclick="nuevaCita()">Agendar otra cita</button>
+      <button class="btn-secondary" style="margin-top:8px" onclick="verEstadoCita()">&#128269; Ver estado de mi cita</button>
+    </div>
+  </div>
+</div>
+<div id="screen-estado" class="screen">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
+      <h1>DentaAgenda</h1>
+    </div>
+    <button class="btn-logout" onclick="showScreen('login')">Salir</button>
+  </div>
+  <div class="scroll-area">
+    <div class="section-title">Estado de tu cita</div>
+    <div class="form-group">
+      <label>Ingresá tu número de identidad</label>
+      <input type="text" id="estado-id" placeholder="Ej: 0801-1990-12345">
+    </div>
+    <button class="btn-primary" onclick="buscarEstado()">Consultar</button>
+    <div id="estado-resultado" style="margin-top:16px"></div>
+    <button class="btn-secondary" style="margin-top:12px" onclick="showScreen('paciente')">&#8592; Volver</button>
+  </div>
+</div>
+</div>
 <script>
-const screenRoles = document.getElementById('screen-roles');
-const screenDatosPaciente = document.getElementById('screen-datos-paciente');
-
-// Al presionar "Soy Paciente" cambia de pantalla directo
-document.getElementById('btn-elegir-paciente').addEventListener('click', () => {
-  screenRoles.classList.remove('active');
-  screenDatosPaciente.classList.add('active');
-});
-
-// Al presionar "Soy Dentista" (Temporal: alerta hasta crear su vista)
-document.getElementById('btn-elegir-dentista').addEventListener('click', () => {
-  alert('¡Ingreso como Dentista! Próximamente se mostrará el panel de control.');
-});
-
-// Botón salir para regresar a la pantalla principal
-document.getElementById('btn-salir').addEventListener('click', () => {
-  screenDatosPaciente.classList.remove('active');
-  screenRoles.classList.add('active');
-  document.getElementById('form-registro-paciente').reset();
-});
-
-// Guardar el formulario de paciente
-document.getElementById('form-registro-paciente').addEventListener('submit', (e) => {
-  e.preventDefault();
-  alert('¡Datos del paciente guardados con éxito!');
-});
+const SLOTS_BASE=['8:00','8:45','9:30','10:15','11:00','11:45','1:00 PM','1:45 PM','2:00 PM','2:45 PM','3:30 PM','4:15 PM'];
+const CITAS_INIT=[{id:1,hora:'8:00',nombre:'Ana Rodríguez',motivo:'Limpieza dental',estado:'atendida'},{id:2,hora:'8:45',nombre:'Carlos Mejía',motivo:'Extracción muela del juicio',estado:'confirmada'},{id:3,hora:'9:30',nombre:'Laura Paz',motivo:'Revisión general',estado:'confirmada'},{id:4,hora:'10:15',nombre:'José Reyes',motivo:'Dolor de muela',estado:'confirmada'},{id:5,hora:'11:00',nombre:'María Santos',motivo:'Ortodoncia',estado:'confirmada'},{id:6,hora:'11:45',nombre:'Pedro Flores',motivo:'Empaste',estado:'cancelada'}];
+const PENDIENTES_INIT=[{id:7,hora:'2:00 PM',nombre:'Sofía Núñez',tel:'9812-3456',motivo:'Blanqueamiento dental'},{id:8,hora:'3:00 PM',nombre:'Diego Castro',tel:'9734-5678',motivo:'Revisión de brackets'}];
+const EXPEDIENTES_INIT=[{nombre:'Ana Rodríguez',id:'0801-1995-11223',edad:29,tel:'9876-0001',visitas:3,ultima:'15 may 2026',nota:'Limpieza cada 6 meses. Sin alergias conocidas.'},{nombre:'Carlos Mejía',id:'0801-1988-44556',edad:36,tel:'9876-0002',visitas:5,ultima:'10 abr 2026',nota:'Extracción muela del juicio pendiente lado derecho.'},{nombre:'Laura Paz',id:'0801-2000-78901',edad:26,tel:'9876-0003',visitas:2,ultima:'2 mar 2026',nota:'Paciente nueva. Revisión general programada.'},{nombre:'José Reyes',id:'0801-1982-33445',edad:42,tel:'9876-0004',visitas:7,ultima:'28 ene 2026',nota:'Tratamiento de conducto completado. Seguimiento mensual.'}];
+function cargarDatos(){if(!localStorage.getItem('da_citas'))localStorage.setItem('da_citas',JSON.stringify(CITAS_INIT));if(!localStorage.getItem('da_pendientes'))localStorage.setItem('da_pendientes',JSON.stringify(PENDIENTES_INIT));if(!localStorage.getItem('da_expedientes'))localStorage.setItem('da_expedientes',JSON.stringify(EXPEDIENTES_INIT));}
+function getCitas(){return JSON.parse(localStorage.getItem('da_citas')||'[]');}
+function getPendientes(){return JSON.parse(localStorage.getItem('da_pendientes')||'[]');}
+function getExpedientes(){return JSON.parse(localStorage.getItem('da_expedientes')||'[]');}
+function saveCitas(d){localStorage.setItem('da_citas',JSON.stringify(d));}
+function savePendientes(d){localStorage.setItem('da_pendientes',JSON.stringify(d));}
+function saveExpedientes(d){localStorage.setItem('da_expedientes',JSON.stringify(d));}
+function getSlotsLibres(){const citas=getCitas(),pendientes=getPendientes(),ocupadas=new Set([...citas.filter(c=>c.estado!=='cancelada').map(c=>c.hora),...pendientes.map(p=>p.hora)]);return SLOTS_BASE.map(h=>({hora:h,libre:!ocupadas.has(h)}));}
+let slotSel=null,pacienteData={};
+function mostrarNotif(msg){const n=document.getElementById('notif');n.textContent=msg;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2500);}
+function setRole(r){document.querySelectorAll('.role-tab').forEach((b,i)=>b.classList.toggle('active',(i===0&&r==='doctora')||(i===1&&r==='paciente')));document.getElementById('login-doctora').classList.toggle('active',r==='doctora');document.getElementById('login-paciente').classList.toggle('active',r==='paciente');document.getElementById('form-error').style.display='none';}
+function showError(msg){const e=document.getElementById('form-error');e.textContent=msg;e.style.display='block';}
+function loginDoctora(){const u=document.getElementById('d-user').value.trim(),p=document.getElementById('d-pass').value.trim();if(u==='dra.belkis'&&p==='dental123'){showScreen('doctora');renderCitas();renderPendientes();renderExpedientes();}else{showError('Usuario o contraseña incorrectos.');}}
+function loginPaciente(){const n=document.getElementById('p-reg-nombre').value.trim(),i=document.getElementById('p-reg-id').value.trim(),e=document.getElementById('p-reg-edad').value.trim(),t=document.getElementById('p-reg-tel').value.trim();if(!n||!i||!e||!t){showError('Por favor completá todos los campos.');return;}pacienteData={nombre:n,id:i,edad:e,tel:t};showScreen('paciente');slotSel=null;renderSlots();document.getElementById('cf-nombre').value=n;document.getElementById('cf-id').value=i;document.getElementById('cf-edad').value=e;document.getElementById('cf-tel').value=t;document.getElementById('cf-motivo').value='';setPaso(1);}
+function showScreen(s){document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));document.getElementById('screen-'+s).classList.add('active');}
+function logout(){document.getElementById('d-user').value='';document.getElementById('d-pass').value='';['p-reg-nombre','p-reg-id','p-reg-edad','p-reg-tel'].forEach(id=>document.getElementById(id).value='');document.getElementById('form-error').style.display='none';showScreen('login');}
+function switchTab(t){document.querySelectorAll('.tab-panel').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.nav-switch button').forEach((b,i)=>b.classList.toggle('active',['hoy','pendientes','expedientes'][i]===t));}
+function labelEstado(e){return{pendiente:'Pendiente',confirmada:'Confirmada',atendida:'Atendida',cancelada:'Cancelada',nopresento:'No se presentó'}[e]||e;}
+function renderCitas(){const CITAS=getCitas(),conf=CITAS.filter(c=>c.estado==='confirmada').length,atend=CITAS.filter(c=>c.estado==='atendida').length,canc=CITAS.filter(c=>c.estado==='cancelada').length;document.getElementById('stats-grid').innerHTML=`<div class="stat"><div class="num">${CITAS.length}</div><div class="lbl">Citas hoy</div></div><div class="stat"><div class="num" style="color:#0077B6">${conf}</div><div class="lbl">Confirmadas</div></div><div class="stat"><div class="num" style="color:#065f46">${atend}</div><div class="lbl">Atendidas</div></div><div class="stat"><div class="num" style="color:#991b1b">${canc}</div><div class="lbl">Canceladas</div></div>`;const sorted=CITAS.slice().sort((a,b)=>SLOTS_BASE.indexOf(a.hora)-SLOTS_BASE.indexOf(b.hora));document.getElementById('citas-lista').innerHTML=sorted.map(c=>`<div class="cita-row"><div class="hora-badge">${c.hora}</div><div class="cita-info"><div class="cita-nombre">${c.nombre}</div><div class="cita-motivo">${c.motivo}</div>${c.estado==='confirmada'||c.estado==='pendiente'?`<div class="action-btns"><button class="btn-sm btn-atendida" onclick="cambiarEstado(${c.id},'atendida')">✓ Atendida</button><button class="btn-sm btn-nopresento" onclick="cambiarEstado(${c.id},'nopresento')">No se presentó</button></div>`:''}</div><span class="badge ${c.estado==='nopresento'?'nopresento':c.estado}">${labelEstado(c.estado)}</span></div>`).join('');}
+function cambiarEstado(id,nuevo){const CITAS=getCitas(),c=CITAS.find(x=>x.id===id);if(c){c.estado=nuevo;saveCitas(CITAS);renderCitas();}}
+function renderPendientes(){const PENDIENTES=getPendientes(),el=document.getElementById('pendientes-lista'),pc=document.getElementById('pend-count');pc.textContent=PENDIENTES.length||'';pc.style.display=PENDIENTES.length?'inline':'none';if(!PENDIENTES.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">✓</div><p>Sin solicitudes pendientes</p></div>';return;}el.innerHTML=PENDIENTES.map(p=>`<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:15px;font-weight:700;color:#03045E">${p.nombre}</div><div style="font-size:12px;color:#0096C7;margin-top:2px">${p.hora} · ${p.motivo}</div><div style="font-size:12px;color:#adb5bd">${p.tel}</div></div><span class="badge pendiente">Pendiente</span></div><div class="action-btns" style="margin-top:12px"><button class="btn-sm btn-confirmar" onclick="accionPendiente(${p.id},'confirmar')">✓ Confirmar</button><button class="btn-sm btn-rechazar" onclick="accionPendiente(${p.id},'rechazar')">✗ Rechazar</button></div></div>`).join('');}
+function accionPendiente(id,accion){const PENDIENTES=getPendientes(),CITAS=getCitas(),idx=PENDIENTES.findIndex(p=>p.id===id);if(idx>-1){if(accion==='confirmar'){const p=PENDIENTES[idx];CITAS.push({id:p.id,hora:p.hora,nombre:p.nombre,motivo:p.motivo,estado:'confirmada'});saveCitas(CITAS);renderCitas();mostrarNotif('✓ Cita confirmada — '+p.nombre);}else{mostrarNotif('Solicitud rechazada');}PENDIENTES.splice(idx,1);savePendientes(PENDIENTES);renderPendientes();}}
+function renderExpedientes(filtro=''){const EXPEDIENTES=getExpedientes(),el=document.getElementById('expedientes-lista'),lista=filtro?EXPEDIENTES.filter(e=>e.nombre.toLowerCase().includes(filtro.toLowerCase())||e.id.includes(filtro)):EXPEDIENTES;if(!lista.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><p>Paciente nuevo, sin visitas anteriores</p></div>';return;}el.innerHTML=lista.map(e=>`<div class="card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div class="avatar">${e.nombre.split(' ').map(n=>n[0]).slice(0,2).join('')}</div><div><div style="font-size:15px;font-weight:700;color:#03045E">${e.nombre}</div><div style="font-size:12px;color:#0096C7">${e.edad} años · ${e.tel}</div></div></div><div class="exp-row"><span>Identidad</span><span>${e.id}</span></div><div class="exp-row"><span>Visitas</span><span>${e.visitas}</span></div><div class="exp-row"><span>Última visita</span><span>${e.ultima}</span></div><div class="exp-nota">${e.nota}</div></div>`).join('');}
+function filtrarExpedientes(v){renderExpedientes(v);}
+function renderSlots(){const slots=getSlotsLibres();document.getElementById('horarios-grid').innerHTML=slots.map((s,i)=>`<button class="slot ${s.libre?(slotSel===i?'seleccionado':'libre'):'ocupado'}" ${s.libre?`onclick="selSlot(${i})"`:'disabled'}>${s.hora}</button>`).join('');}
+function selSlot(i){slotSel=i;document.getElementById('slot-err').style.display='none';renderSlots();}
+function irPaso2(){if(slotSel===null){document.getElementById('slot-err').style.display='block';return;}const slots=getSlotsLibres();document.getElementById('slot-resumen').innerHTML=`<small>Horario seleccionado</small><strong>${slots[slotSel].hora} · Clínica Dra. Belkis Suisse</strong>`;setPaso(2);}
+function irPaso1(){setPaso(1);}
+function setPaso(n){[1,2,3].forEach(i=>{document.getElementById('pstep-'+i).classList.toggle('active',i===n);document.getElementById('si'+i).classList.toggle('active',i<=n);});}
+function enviarSolicitud(){const m=document.getElementById('cf-motivo').value.trim();if(!m){document.getElementById('motivo-err').style.display='block';return;}document.getElementById('motivo-err').style.display='none';const slots=getSlotsLibres(),horaElegida=slots[slotSel].hora,PENDIENTES=getPendientes(),nuevoId=Date.now();PENDIENTES.push({id:nuevoId,hora:horaElegida,nombre:pacienteData.nombre,tel:pacienteData.tel,motivo:m});savePendientes(PENDIENTES);const EXPEDIENTES=getExpedientes(),existe=EXPEDIENTES.find(e=>e.id===pacienteData.id);if(!existe){EXPEDIENTES.push({nombre:pacienteData.nombre,id:pacienteData.id,edad:parseInt(pacienteData.edad),tel:pacienteData.tel,visitas:0,ultima:'—',nota:'Paciente nuevo. Sin notas de tratamiento aún.'});saveExpedientes(EXPEDIENTES);}document.getElementById('confirm-detail').innerHTML=`<div><span>Paciente</span><span style="font-weight:600">${pacienteData.nombre}</span></div><div><span>Horario</span><span style="font-weight:600">${horaElegida}</span></div><div><span>Motivo</span><span style="font-weight:600">${m}</span></div><div><span>Estado</span><span style="color:#856404;font-weight:700;background:#fff3cd;padding:2px 8px;border-radius:8px">Pendiente de confirmación</span></div>`;setPaso(3);}
+function nuevaCita(){slotSel=null;document.getElementById('cf-motivo').value='';renderSlots();setPaso(1);}
+function verEstadoCita(){document.getElementById('estado-id').value=pacienteData.id||'';document.getElementById('estado-resultado').innerHTML='';showScreen('estado');}
+function buscarEstado(){const idBuscado=document.getElementById('estado-id').value.trim();if(!idBuscado){document.getElementById('estado-resultado').innerHTML='<p style="font-size:13px;color:#c0392b;margin-top:8px">Por favor ingresá tu número de identidad.</p>';return;}const exp=getExpedientes().find(e=>e.id===idBuscado);if(!exp){document.getElementById('estado-resultado').innerHTML='<div class="card" style="text-align:center;padding:24px"><div style="font-size:32px;margin-bottom:8px">🔍</div><div style="font-size:14px;color:#0096C7;font-weight:600">No encontramos citas para ese número.</div><div style="font-size:12px;color:#adb5bd;margin-top:4px">Verificá el número o agendá una nueva cita.</div></div>';return;}const nombre=exp.nombre,PENDIENTES=getPendientes(),CITAS=getCitas(),pendiente=PENDIENTES.find(p=>p.nombre===nombre),cita=CITAS.find(c=>c.nombre===nombre&&c.estado!=='atendida'&&c.estado!=='cancelada'&&c.estado!=='nopresento'),item=cita||pendiente;if(!item){document.getElementById('estado-resultado').innerHTML='<div class="card" style="text-align:center;padding:24px"><div style="font-size:32px;margin-bottom:8px">📋</div><div style="font-size:14px;color:#0096C7;font-weight:600">No tenés citas activas en este momento.</div></div>';return;}const estado=cita?cita.estado:'pendiente',colores={pendiente:{bg:'#fff3cd',color:'#856404',icon:'⏳',msg:'Tu cita está pendiente de confirmación por la doctora.'},confirmada:{bg:'#d0f0fd',color:'#0077B6',icon:'✅',msg:'¡Tu cita fue confirmada! Recordá llegar a tiempo.'},atendida:{bg:'#d1fae5',color:'#065f46',icon:'✓',msg:'Esta cita ya fue atendida.'},cancelada:{bg:'#fee2e2',color:'#991b1b',icon:'✗',msg:'Esta cita fue cancelada.'},nopresento:{bg:'#f3f4f6',color:'#6b7280',icon:'—',msg:'Se registró que no te presentaste.'}},c=colores[estado]||colores.pendiente;document.getElementById('estado-resultado').innerHTML=`<div class="card"><div style="text-align:center;padding:12px 0 16px"><div style="font-size:36px;margin-bottom:8px">${c.icon}</div><div style="font-size:16px;font-weight:700;color:${c.color}">${labelEstado(estado)}</div><div style="font-size:12px;color:#0096C7;margin-top:4px">${c.msg}</div></div><div style="background:${c.bg};border-radius:10px;padding:12px"><div class="exp-row"><span>Paciente</span><span>${item.nombre}</span></div><div class="exp-row"><span>Horario</span><span>${item.hora}</span></div><div class="exp-row"><span>Motivo</span><span>${item.motivo}</span></div><div class="exp-row"><span>Estado</span><span style="color:${c.color};font-weight:700">${labelEstado(estado)}</span></div></div></div>`;}
+cargarDatos();
 </script>
-
 </body>
 </html>
