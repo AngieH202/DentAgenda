@@ -6,16 +6,21 @@
 <meta name="theme-color" content="#0077B6">
 <title>DentaAgenda</title>
 <style>
+
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#EAF4FB;min-height:100vh;color:#03045E}
 .app{max-width:430px;margin:0 auto;background:#fff;min-height:100vh;display:flex;flex-direction:column;box-shadow:0 0 24px rgba(0,119,182,0.1)}
+
+
 .topbar{background:linear-gradient(135deg,#0077B6,#00B4D8);padding:16px;display:flex;align-items:center;justify-content:space-between}
 .topbar-logo{display:flex;align-items:center;gap:10px}
 .topbar-logo svg{width:28px;height:28px;fill:#fff}
 .topbar h1{color:#fff;font-size:18px;font-weight:600;letter-spacing:.5px}
 .btn-logout{background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:12px;padding:6px 12px;border-radius:8px;cursor:pointer}
+
 .screen{display:none;flex:1;flex-direction:column}
 .screen.active{display:flex}
+
 .login-bg{background:linear-gradient(160deg,#0077B6 0%,#00B4D8 50%,#EAF4FB 100%);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px}
 .login-logo{text-align:center;margin-bottom:32px}
 .login-logo svg{width:56px;height:56px;fill:#fff;margin-bottom:10px}
@@ -27,30 +32,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .role-tab.active{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border-color:transparent}
 .login-form{display:none}
 .login-form.active{display:block}
+
 .form-group{margin-bottom:14px}
 .form-group label{font-size:13px;color:#023E8A;font-weight:500;display:block;margin-bottom:5px}
 .form-group input,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid #cae5f5;border-radius:10px;font-size:14px;color:#03045E;background:#f8fbff;outline:none;transition:border .2s}
 .form-group input:focus,.form-group textarea:focus{border-color:#0077B6;background:#fff}
 .form-group textarea{resize:none;height:80px}
+
+
 .btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;letter-spacing:.3px;transition:opacity .2s}
 .btn-primary:active{opacity:.85}
 .btn-primary:disabled{opacity:.6;cursor:not-allowed}
 .btn-secondary{width:100%;padding:11px;background:transparent;color:#0077B6;border:1.5px solid #cae5f5;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px}
 .btn-secondary:hover{background:#f0f9ff}
 .btn-estado{width:100%;padding:11px;background:#f0f9ff;color:#0077B6;border:1.5px solid #0077B6;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;text-align:center}
-.error-msg{background:#fff0f0;border:1px solid #ffcccc;color:#c0392b;font-size:13px;padding:10px 12px;border-radius:8px;margin-bottom:12px;display:none}
+.btn-sm{font-size:12px;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+.btn-atendida{background:#d1fae5;color:#065f46}
+.btn-nopresento{background:#f3f4f6;color:#6b7280}
+.btn-confirmar{background:#d0f0fd;color:#0077B6}
+.btn-rechazar{background:#fee2e2;color:#991b1b}
+
+
 .divider{display:flex;align-items:center;gap:8px;margin:14px 0}
 .divider span{font-size:12px;color:#adb5bd;white-space:nowrap}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:#e0f0f8}
+.error-msg{background:#fff0f0;border:1px solid #ffcccc;color:#c0392b;font-size:13px;padding:10px 12px;border-radius:8px;margin-bottom:12px;display:none}
+
+
 .nav-switch{display:flex;border-bottom:2px solid #e0f0f8}
 .nav-switch button{flex:1;padding:12px 8px;border:none;background:transparent;color:#0077B6;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
 .nav-switch button.active{color:#0077B6;border-bottom-color:#0077B6;font-weight:700}
 .scroll-area{overflow-y:auto;flex:1;padding:16px}
 .section-title{font-size:11px;font-weight:700;color:#00B4D8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
 .stat{background:linear-gradient(135deg,#f0f9ff,#e0f4fb);border-radius:12px;padding:14px;text-align:center;border:1px solid #cae5f5}
 .stat .num{font-size:24px;font-weight:700;color:#0077B6}
 .stat .lbl{font-size:11px;color:#0096C7;margin-top:2px;font-weight:500}
+
+
 .card{background:#fff;border:1px solid #cae5f5;border-radius:14px;padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,119,182,0.06)}
 .cita-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f0f9ff}
 .cita-row:last-child{border-bottom:none;padding-bottom:0}
@@ -58,35 +81,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .cita-info{flex:1}
 .cita-nombre{font-size:14px;font-weight:600;color:#03045E}
 .cita-motivo{font-size:12px;color:#0096C7;margin-top:1px}
+.action-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+
 .badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:600;white-space:nowrap}
 .badge.pendiente{background:#fff3cd;color:#856404}
 .badge.confirmada{background:#d0f0fd;color:#0077B6}
 .badge.atendida{background:#d1fae5;color:#065f46}
 .badge.cancelada{background:#fee2e2;color:#991b1b}
 .badge.nopresento{background:#f3f4f6;color:#6b7280}
-.action-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.btn-sm{font-size:12px;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
-.btn-atendida{background:#d1fae5;color:#065f46}
-.btn-nopresento{background:#f3f4f6;color:#6b7280}
-.btn-confirmar{background:#d0f0fd;color:#0077B6}
-.btn-rechazar{background:#fee2e2;color:#991b1b}
+
 .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#0077B6,#00B4D8);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
 .exp-row{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid #f0f9ff}
 .exp-row:last-child{border-bottom:none}
 .exp-row span:first-child{color:#0096C7;font-weight:500}
 .exp-row span:last-child{color:#03045E;font-weight:600}
 .exp-nota{background:#f0f9ff;border-radius:8px;padding:10px;font-size:12px;color:#0077B6;margin-top:8px;border-left:3px solid #00B4D8}
+
 .horarios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
 .slot{padding:11px 6px;border:1.5px solid #cae5f5;border-radius:10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:#0077B6;background:#f8fbff;transition:all .2s}
 .slot.libre:hover{border-color:#0077B6;background:#e0f4fb}
 .slot.seleccionado{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border-color:transparent}
 .slot.ocupado{background:#f3f4f6;color:#adb5bd;cursor:not-allowed;text-decoration:line-through}
+
+
 .step-bar{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid #e0f0f8;background:#f8fbff}
 .step-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#adb5bd;font-weight:500}
 .step-item.active{color:#0077B6;font-weight:700}
 .step-dot{width:22px;height:22px;border-radius:50%;background:#e0f0f8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#adb5bd}
 .step-item.active .step-dot{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff}
 .step-line{flex:1;height:1.5px;background:#e0f0f8;margin:0 4px}
+.pstep{display:none}
+.pstep.active{display:block}
+
+
 .confirm-box{background:linear-gradient(135deg,#f0f9ff,#e0f4fb);border:1.5px solid #00B4D8;border-radius:16px;padding:24px;text-align:center}
 .confirm-icon{width:56px;height:56px;background:linear-gradient(135deg,#0077B6,#00B4D8);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
 .confirm-icon svg{width:28px;height:28px;fill:#fff}
@@ -98,27 +125,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .slot-resumen{background:linear-gradient(135deg,#f0f9ff,#e0f4fb);border-radius:10px;padding:12px 14px;margin-bottom:16px;border:1px solid #cae5f5}
 .slot-resumen small{font-size:11px;color:#0096C7;font-weight:500}
 .slot-resumen strong{display:block;font-size:15px;color:#0077B6;font-weight:700;margin-top:2px}
-.empty-state{text-align:center;padding:40px 16px;color:#adb5bd}
-.empty-icon{font-size:40px;margin-bottom:8px}
-.empty-state p{font-size:14px}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-.pstep{display:none}
-.pstep.active{display:block}
-.notif{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#03045E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
-.notif.show{opacity:1}
-.loading{text-align:center;padding:24px;color:#0096C7;font-size:13px}
+
 .estado-card{border-radius:14px;padding:20px;text-align:center;margin-bottom:12px}
 .estado-icon{font-size:40px;margin-bottom:8px}
 .estado-titulo{font-size:17px;font-weight:700;margin-bottom:4px}
 .estado-msg{font-size:13px;margin-bottom:14px}
+
+
+.empty-state{text-align:center;padding:40px 16px;color:#adb5bd}
+.empty-icon{font-size:40px;margin-bottom:8px}
+.empty-state p{font-size:14px}
+.loading{text-align:center;padding:24px;color:#0096C7;font-size:13px}
+.notif{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#03045E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
+.notif.show{opacity:1}
 </style>
 </head>
 <body>
 <div class="app">
 <div id="notif" class="notif"></div>
 
-<!-- LOGIN -->
 <div id="screen-login" class="screen active">
   <div class="login-bg">
     <div class="login-logo">
@@ -132,15 +157,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <button class="role-tab" onclick="setRole('paciente')">&#9786; Paciente</button>
       </div>
       <div id="form-error" class="error-msg"></div>
-
-      <!-- DOCTORA -->
       <div id="login-doctora" class="login-form active">
         <div class="form-group"><label>Usuario</label><input type="text" id="d-usuario" placeholder="belki.den"></div>
         <div class="form-group"><label>Contraseña</label><input type="password" id="d-pass" placeholder="••••••••"></div>
         <button class="btn-primary" id="btn-doc" onclick="loginDoctora()">Ingresar</button>
       </div>
-
-      <!-- PACIENTE -->
       <div id="login-paciente" class="login-form">
         <div class="form-group"><label>Nombre completo</label><input type="text" id="p-nombre" placeholder="Ej: María López"></div>
         <div class="form-group"><label>Número de identidad</label><input type="text" id="p-id" placeholder="Ej: 0801-1990-12345"></div>
@@ -150,8 +171,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="divider"><span>¿Ya agendaste antes?</span></div>
         <button class="btn-estado" onclick="setRole('estado')">&#128269; Ver estado de mi cita</button>
       </div>
-
-      <!-- ESTADO CITA -->
       <div id="login-estado" class="login-form">
         <p style="font-size:13px;color:#0096C7;margin-bottom:14px;text-align:center">Ingresá tu número de identidad para ver el estado de tu cita</p>
         <div class="form-group"><label>Número de identidad</label><input type="text" id="e-id" placeholder="Ej: 0801-1990-12345"></div>
@@ -162,7 +181,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- ESTADO CITA SCREEN -->
 <div id="screen-estado" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
@@ -178,7 +196,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- DOCTORA -->
 <div id="screen-doctora" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
@@ -210,7 +227,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- PACIENTE -->
 <div id="screen-paciente" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
@@ -267,21 +283,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 </div>
-</div>
 
+</div>
 <script>
+
 const SB_URL = 'https://aivhrpvorvnoylbqkuqy.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmhycHZvcnZub3lsYnFrdXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNjc1NjksImV4cCI6MjA5Njk0MzU2OX0.B4ZNMwy-qGMZkX7-OdBfOCC1lcIZfxgOrGcEufj5xNw';
 const SLOTS_BASE = ['8:00','8:45','9:30','10:15','11:00','11:45','1:00 PM','1:45 PM','2:00 PM','2:45 PM','3:30 PM','4:15 PM'];
-
-// Usuario doctora mapeado a correo real
 const DOCTORA_USUARIO = 'belki.den';
-const DOCTORA_EMAIL = 'belki.den@dentaagenda.com';
-const DOCTORA_PASS = 'dental123';
+const DOCTORA_EMAIL   = 'belki.den@dentaagenda.com';
 
 let slotSel = null;
 let pacienteData = {};
 let allExpedientes = [];
+
 
 async function sbGet(tabla, query=''){
   const res = await fetch(`${SB_URL}/rest/v1/${tabla}?${query}`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
@@ -306,6 +321,7 @@ function hideError(){document.getElementById('form-error').style.display='none';
 function showScreen(s){document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));document.getElementById('screen-'+s).classList.add('active');}
 function labelEstado(e){return{pendiente:'Pendiente',confirmada:'Confirmada',atendida:'Atendida',cancelada:'Cancelada',nopresento:'No se presentó'}[e]||e;}
 
+
 function setRole(r){
   document.querySelectorAll('.role-tab').forEach((b,i)=>b.classList.toggle('active',(i===0&&r==='doctora')||(i===1&&r==='paciente')));
   document.getElementById('login-doctora').classList.toggle('active',r==='doctora');
@@ -314,28 +330,23 @@ function setRole(r){
   hideError();
 }
 
-// LOGIN DOCTORA — usuario simple mapeado a correo
+
 async function loginDoctora(){
-  const usuario = document.getElementById('d-usuario').value.trim();
-  const pass = document.getElementById('d-pass').value.trim();
+  const usuario=document.getElementById('d-usuario').value.trim();
+  const pass=document.getElementById('d-pass').value.trim();
   if(!usuario||!pass){showError('Completá todos los campos.');return;}
-  if(usuario !== DOCTORA_USUARIO){showError('Usuario o contraseña incorrectos.');return;}
-  const btn = document.getElementById('btn-doc');
-  btn.disabled=true; btn.textContent='Ingresando...';
+  if(usuario!==DOCTORA_USUARIO){showError('Usuario o contraseña incorrectos.');return;}
+  const btn=document.getElementById('btn-doc');
+  btn.disabled=true;btn.textContent='Ingresando...';
   hideError();
-  const res = await authLogin(DOCTORA_EMAIL, pass);
+  const res=await authLogin(DOCTORA_EMAIL,pass);
   if(res.access_token){
     showScreen('doctora');
-    cargarCitas();
-    cargarPendientes();
-    cargarExpedientes();
-  } else {
-    showError('Usuario o contraseña incorrectos.');
-  }
-  btn.disabled=false; btn.textContent='Ingresar';
+    cargarCitas();cargarPendientes();cargarExpedientes();
+  }else{showError('Usuario o contraseña incorrectos.');}
+  btn.disabled=false;btn.textContent='Ingresar';
 }
 
-// LOGIN PACIENTE — solo datos personales
 async function loginPaciente(){
   const nombre=document.getElementById('p-nombre').value.trim();
   const id=document.getElementById('p-id').value.trim();
@@ -343,9 +354,9 @@ async function loginPaciente(){
   const tel=document.getElementById('p-tel').value.trim();
   if(!nombre||!id||!edad||!tel){showError('Por favor completá todos los campos.');return;}
   const btn=document.getElementById('btn-pac');
-  btn.disabled=true; btn.textContent='Cargando...';
+  btn.disabled=true;btn.textContent='Cargando...';
   hideError();
-  const existentes = await sbGet('expedientes',`identidad=eq.${encodeURIComponent(id)}`);
+  const existentes=await sbGet('expedientes',`identidad=eq.${encodeURIComponent(id)}`);
   if(!existentes.length){
     await sbPost('expedientes',{nombre,identidad:id,edad:parseInt(edad),telefono:tel,visitas:0,ultima_visita:'—',notas:'Paciente nuevo.'});
   }
@@ -357,38 +368,24 @@ async function loginPaciente(){
   document.getElementById('cf-motivo').value='';
   slotSel=null;
   showScreen('paciente');
-  cargarSlots();
-  setPaso(1);
-  btn.disabled=false; btn.textContent='Agendar cita';
+  cargarSlots();setPaso(1);
+  btn.disabled=false;btn.textContent='Agendar cita';
 }
 
-// CONSULTAR ESTADO CON SOLO EL ID
+
 async function consultarEstado(){
-  const id = document.getElementById('e-id').value.trim();
+  const id=document.getElementById('e-id').value.trim();
   if(!id){showError('Por favor ingresá tu número de identidad.');return;}
   const btn=document.getElementById('btn-estado');
-  btn.disabled=true; btn.textContent='Consultando...';
+  btn.disabled=true;btn.textContent='Consultando...';
   hideError();
-
-  const expediente = await sbGet('expedientes',`identidad=eq.${encodeURIComponent(id)}`);
-  if(!expediente.length){
-    showError('No encontramos citas con ese número de identidad.');
-    btn.disabled=false; btn.textContent='Consultar';
-    return;
-  }
-
-  const nombre = expediente[0].nombre;
-  const citas = await sbGet('citas',`nombre_paciente=eq.${encodeURIComponent(nombre)}&order=created_at.desc`);
-
+  const expediente=await sbGet('expedientes',`identidad=eq.${encodeURIComponent(id)}`);
+  if(!expediente.length){showError('No encontramos citas con ese número de identidad.');btn.disabled=false;btn.textContent='Consultar';return;}
+  const nombre=expediente[0].nombre;
+  const citas=await sbGet('citas',`nombre_paciente=eq.${encodeURIComponent(nombre)}&order=created_at.desc`);
   showScreen('estado');
-  const el = document.getElementById('estado-resultado');
-
-  if(!citas.length){
-    el.innerHTML=`<div class="empty-state"><div class="empty-icon">📋</div><p>No tenés citas registradas</p></div>`;
-    btn.disabled=false; btn.textContent='Consultar';
-    return;
-  }
-
+  const el=document.getElementById('estado-resultado');
+  if(!citas.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><p>No tenés citas registradas</p></div>';btn.disabled=false;btn.textContent='Consultar';return;}
   const colores={
     pendiente:{bg:'#fff3cd',color:'#856404',icon:'⏳',msg:'Tu cita está pendiente de confirmación por la doctora.'},
     confirmada:{bg:'#d0f0fd',color:'#0077B6',icon:'✅',msg:'¡Tu cita fue confirmada! Recordá llegar a tiempo.'},
@@ -396,8 +393,7 @@ async function consultarEstado(){
     cancelada:{bg:'#fee2e2',color:'#991b1b',icon:'✗',msg:'Tu cita fue rechazada. Podés agendar una nueva.'},
     nopresento:{bg:'#f3f4f6',color:'#6b7280',icon:'—',msg:'Se registró que no te presentaste a esta cita.'}
   };
-
-  el.innerHTML = citas.map(c=>{
+  el.innerHTML=citas.map(c=>{
     const col=colores[c.estado]||colores.pendiente;
     return `<div class="estado-card" style="background:${col.bg};border:1.5px solid ${col.color}">
       <div class="estado-icon">${col.icon}</div>
@@ -410,8 +406,7 @@ async function consultarEstado(){
       </div>
     </div>`;
   }).join('');
-
-  btn.disabled=false; btn.textContent='Consultar';
+  btn.disabled=false;btn.textContent='Consultar';
 }
 
 function logout(){
@@ -419,17 +414,16 @@ function logout(){
   document.getElementById('d-usuario').value='';
   document.getElementById('d-pass').value='';
   ['p-nombre','p-id','p-edad','p-tel'].forEach(i=>document.getElementById(i).value='');
-  hideError();
-  setRole('paciente');
-  showScreen('login');
+  hideError();setRole('paciente');showScreen('login');
 }
 
 function switchTab(t){
   document.querySelectorAll('.tab-panel').forEach(el=>el.classList.remove('active'));
   document.getElementById('tab-'+t).classList.add('active');
   document.querySelectorAll('.nav-switch button').forEach((b,i)=>b.classList.toggle('active',['hoy','pendientes','expedientes'][i]===t));
-  if(t==='expedientes') cargarExpedientes();
+  if(t==='expedientes')cargarExpedientes();
 }
+
 
 async function cargarCitas(){
   document.getElementById('citas-lista').innerHTML='<div class="loading">Cargando citas...</div>';
@@ -457,19 +451,16 @@ async function cargarCitas(){
       <span class="badge ${c.estado==='nopresento'?'nopresento':c.estado}">${labelEstado(c.estado)}</span>
     </div></div>`).join('');
 }
-
 async function cambiarEstado(id,nuevo){
   await sbPatch('citas','id=eq.'+id,{estado:nuevo});
-  notif('Estado actualizado');
-  cargarCitas();
+  notif('Estado actualizado');cargarCitas();
 }
 
 async function cargarPendientes(){
   document.getElementById('pendientes-lista').innerHTML='<div class="loading">Cargando...</div>';
   const pendientes=await sbGet('citas','estado=eq.pendiente&order=hora.asc');
   const pc=document.getElementById('pend-count');
-  pc.textContent=pendientes.length||'';
-  pc.style.display=pendientes.length?'inline':'none';
+  pc.textContent=pendientes.length||'';pc.style.display=pendientes.length?'inline':'none';
   if(!pendientes.length){document.getElementById('pendientes-lista').innerHTML='<div class="empty-state"><div class="empty-icon">✓</div><p>Sin solicitudes pendientes</p></div>';return;}
   document.getElementById('pendientes-lista').innerHTML=pendientes.map(p=>`
     <div class="card">
@@ -487,20 +478,17 @@ async function cargarPendientes(){
       </div>
     </div>`).join('');
 }
-
 async function accionPendiente(id,estado){
   await sbPatch('citas','id=eq.'+id,{estado});
   notif(estado==='confirmada'?'✓ Cita confirmada':'Solicitud rechazada');
-  cargarPendientes();
-  cargarCitas();
+  cargarPendientes();cargarCitas();
 }
+
 
 async function cargarExpedientes(){
   const data=await sbGet('expedientes','order=nombre.asc');
-  allExpedientes=data||[];
-  renderExpedientes(allExpedientes);
+  allExpedientes=data||[];renderExpedientes(allExpedientes);
 }
-
 function renderExpedientes(lista){
   const el=document.getElementById('expedientes-lista');
   if(!lista.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><p>No se encontraron pacientes</p></div>';return;}
@@ -517,7 +505,6 @@ function renderExpedientes(lista){
       <div class="exp-nota">${e.notas||'Sin notas.'}</div>
     </div>`).join('');
 }
-
 function filtrarExpedientes(v){
   const f=v?allExpedientes.filter(e=>e.nombre.toLowerCase().includes(v.toLowerCase())||(e.identidad||'').includes(v)):allExpedientes;
   renderExpedientes(f);
@@ -532,8 +519,8 @@ async function cargarSlots(){
     return `<button class="slot ${libre?(slotSel===i?'seleccionado':'libre'):'ocupado'}" ${libre?`onclick="selSlot(${i})"`:'disabled'}>${h}</button>`;
   }).join('');
 }
-
 function selSlot(i){slotSel=i;document.getElementById('slot-err').style.display='none';cargarSlots();}
+
 
 function irPaso2(){
   if(slotSel===null){document.getElementById('slot-err').style.display='block';return;}
@@ -548,7 +535,7 @@ async function enviarSolicitud(){
   if(!motivo){document.getElementById('motivo-err').style.display='block';return;}
   document.getElementById('motivo-err').style.display='none';
   const btn=document.getElementById('btn-enviar');
-  btn.disabled=true; btn.textContent='Enviando...';
+  btn.disabled=true;btn.textContent='Enviando...';
   const hora=SLOTS_BASE[slotSel];
   const {ok}=await sbPost('citas',{nombre_paciente:pacienteData.nombre,telefono_paciente:pacienteData.tel,hora,motivo,estado:'pendiente'});
   if(ok){
@@ -558,10 +545,8 @@ async function enviarSolicitud(){
       <div><span>Motivo</span><span style="font-weight:600">${motivo}</span></div>
       <div><span>Estado</span><span style="color:#856404;font-weight:700;background:#fff3cd;padding:2px 8px;border-radius:8px">Pendiente de confirmación</span></div>`;
     setPaso(3);
-  } else {
-    notif('Error al enviar. Intentá de nuevo.');
-  }
-  btn.disabled=false; btn.textContent='Enviar solicitud';
+  }else{notif('Error al enviar. Intentá de nuevo.');}
+  btn.disabled=false;btn.textContent='Enviar solicitud';
 }
 
 function nuevaCita(){slotSel=null;document.getElementById('cf-motivo').value='';cargarSlots();setPaso(1);}
