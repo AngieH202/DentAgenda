@@ -31,10 +31,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .form-group label{font-size:13px;color:#023E8A;font-weight:500;display:block;margin-bottom:5px}
 .form-group input,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid #cae5f5;border-radius:10px;font-size:14px;color:#03045E;background:#f8fbff;outline:none;transition:border .2s}
 .form-group input:focus,.form-group textarea:focus{border-color:#0077B6;background:#fff}
-.form-group textarea{resize:none;height:72px}
+.form-group textarea{resize:none;height:80px}
 .btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;letter-spacing:.3px;transition:opacity .2s}
 .btn-primary:active{opacity:.85}
+.btn-primary:disabled{opacity:.6;cursor:not-allowed}
+.btn-secondary{width:100%;padding:11px;background:transparent;color:#0077B6;border:1.5px solid #cae5f5;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px}
+.btn-secondary:hover{background:#f0f9ff}
+.btn-estado{width:100%;padding:11px;background:#f0f9ff;color:#0077B6;border:1.5px solid #0077B6;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;text-align:center}
 .error-msg{background:#fff0f0;border:1px solid #ffcccc;color:#c0392b;font-size:13px;padding:10px 12px;border-radius:8px;margin-bottom:12px;display:none}
+.divider{display:flex;align-items:center;gap:8px;margin:14px 0}
+.divider span{font-size:12px;color:#adb5bd;white-space:nowrap}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#e0f0f8}
 .nav-switch{display:flex;border-bottom:2px solid #e0f0f8}
 .nav-switch button{flex:1;padding:12px 8px;border:none;background:transparent;color:#0077B6;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
 .nav-switch button.active{color:#0077B6;border-bottom-color:#0077B6;font-weight:700}
@@ -58,8 +65,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge.cancelada{background:#fee2e2;color:#991b1b}
 .badge.nopresento{background:#f3f4f6;color:#6b7280}
 .action-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.btn-sm{font-size:12px;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600;transition:opacity .2s}
-.btn-sm:active{opacity:.75}
+.btn-sm{font-size:12px;padding:5px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
 .btn-atendida{background:#d1fae5;color:#065f46}
 .btn-nopresento{background:#f3f4f6;color:#6b7280}
 .btn-confirmar{background:#d0f0fd;color:#0077B6}
@@ -74,7 +80,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .slot{padding:11px 6px;border:1.5px solid #cae5f5;border-radius:10px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;color:#0077B6;background:#f8fbff;transition:all .2s}
 .slot.libre:hover{border-color:#0077B6;background:#e0f4fb}
 .slot.seleccionado{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border-color:transparent}
-.slot.ocupado{background:#f3f4f6;color:#adb5bd;cursor:not-allowed;font-weight:400;text-decoration:line-through}
+.slot.ocupado{background:#f3f4f6;color:#adb5bd;cursor:not-allowed;text-decoration:line-through}
 .step-bar{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid #e0f0f8;background:#f8fbff}
 .step-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#adb5bd;font-weight:500}
 .step-item.active{color:#0077B6;font-weight:700}
@@ -95,19 +101,24 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .empty-state{text-align:center;padding:40px 16px;color:#adb5bd}
 .empty-icon{font-size:40px;margin-bottom:8px}
 .empty-state p{font-size:14px}
-.btn-secondary{width:100%;padding:11px;background:transparent;color:#0077B6;border:1.5px solid #cae5f5;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;margin-top:8px;transition:background .2s}
-.btn-secondary:hover{background:#f0f9ff}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 .pstep{display:none}
 .pstep.active{display:block}
 .notif{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#03045E;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
 .notif.show{opacity:1}
+.loading{text-align:center;padding:24px;color:#0096C7;font-size:13px}
+.estado-card{border-radius:14px;padding:20px;text-align:center;margin-bottom:12px}
+.estado-icon{font-size:40px;margin-bottom:8px}
+.estado-titulo{font-size:17px;font-weight:700;margin-bottom:4px}
+.estado-msg{font-size:13px;margin-bottom:14px}
 </style>
 </head>
 <body>
 <div class="app">
 <div id="notif" class="notif"></div>
+
+<!-- LOGIN -->
 <div id="screen-login" class="screen active">
   <div class="login-bg">
     <div class="login-logo">
@@ -117,25 +128,57 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="login-card">
       <div class="role-tabs">
-        <button class="role-tab active" onclick="setRole('doctora')">&#9673; Soy doctora</button>
-        <button class="role-tab" onclick="setRole('paciente')">&#9786; Soy paciente</button>
+        <button class="role-tab active" onclick="setRole('doctora')">&#9673; Doctora</button>
+        <button class="role-tab" onclick="setRole('paciente')">&#9786; Paciente</button>
       </div>
       <div id="form-error" class="error-msg"></div>
+
+      <!-- DOCTORA -->
       <div id="login-doctora" class="login-form active">
-        <div class="form-group"><label>Usuario</label><input type="text" id="d-user" placeholder="dra.belkis"></div>
+        <div class="form-group"><label>Usuario</label><input type="text" id="d-usuario" placeholder="belki.den"></div>
         <div class="form-group"><label>Contraseña</label><input type="password" id="d-pass" placeholder="••••••••"></div>
-        <button class="btn-primary" onclick="loginDoctora()">Ingresar</button>
+        <button class="btn-primary" id="btn-doc" onclick="loginDoctora()">Ingresar</button>
       </div>
+
+      <!-- PACIENTE -->
       <div id="login-paciente" class="login-form">
-        <div class="form-group"><label>Nombre completo</label><input type="text" id="p-reg-nombre" placeholder="Ej: María López"></div>
-        <div class="form-group"><label>Número de identidad</label><input type="text" id="p-reg-id" placeholder="Ej: 0801-1990-12345"></div>
-        <div class="form-group"><label>Edad</label><input type="number" id="p-reg-edad" placeholder="Ej: 34" min="1" max="120"></div>
-        <div class="form-group"><label>Teléfono</label><input type="tel" id="p-reg-tel" placeholder="Ej: 9876-5432"></div>
-        <button class="btn-primary" onclick="loginPaciente()">Continuar</button>
+        <div class="form-group"><label>Nombre completo</label><input type="text" id="p-nombre" placeholder="Ej: María López"></div>
+        <div class="form-group"><label>Número de identidad</label><input type="text" id="p-id" placeholder="Ej: 0801-1990-12345"></div>
+        <div class="form-group"><label>Edad</label><input type="number" id="p-edad" placeholder="Ej: 34" min="1" max="120"></div>
+        <div class="form-group"><label>Teléfono</label><input type="tel" id="p-tel" placeholder="Ej: 9876-5432"></div>
+        <button class="btn-primary" id="btn-pac" onclick="loginPaciente()">Agendar cita</button>
+        <div class="divider"><span>¿Ya agendaste antes?</span></div>
+        <button class="btn-estado" onclick="setRole('estado')">&#128269; Ver estado de mi cita</button>
+      </div>
+
+      <!-- ESTADO CITA -->
+      <div id="login-estado" class="login-form">
+        <p style="font-size:13px;color:#0096C7;margin-bottom:14px;text-align:center">Ingresá tu número de identidad para ver el estado de tu cita</p>
+        <div class="form-group"><label>Número de identidad</label><input type="text" id="e-id" placeholder="Ej: 0801-1990-12345"></div>
+        <button class="btn-primary" id="btn-estado" onclick="consultarEstado()">Consultar</button>
+        <button class="btn-secondary" onclick="setRole('paciente')">&larr; Volver</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- ESTADO CITA SCREEN -->
+<div id="screen-estado" class="screen">
+  <div class="topbar">
+    <div class="topbar-logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
+      <h1>DentaAgenda</h1>
+    </div>
+    <button class="btn-logout" onclick="showScreen('login')">Salir</button>
+  </div>
+  <div class="scroll-area">
+    <div class="section-title">Estado de tu cita</div>
+    <div id="estado-resultado"></div>
+    <button class="btn-secondary" style="margin-top:8px" onclick="showScreen('login')">&#8592; Volver al inicio</button>
+  </div>
+</div>
+
+<!-- DOCTORA -->
 <div id="screen-doctora" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
@@ -153,11 +196,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="tab-hoy" class="tab-panel active">
       <div class="stats-grid" id="stats-grid"></div>
       <div class="section-title">Agenda del día</div>
-      <div class="card" id="citas-lista"></div>
+      <div id="citas-lista"><div class="loading">Cargando citas...</div></div>
     </div>
     <div id="tab-pendientes" class="tab-panel">
       <div class="section-title">Solicitudes pendientes de confirmación</div>
-      <div id="pendientes-lista"></div>
+      <div id="pendientes-lista"><div class="loading">Cargando...</div></div>
     </div>
     <div id="tab-expedientes" class="tab-panel">
       <div class="section-title">Buscar paciente</div>
@@ -166,6 +209,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 </div>
+
+<!-- PACIENTE -->
 <div id="screen-paciente" class="screen">
   <div class="topbar">
     <div class="topbar-logo">
@@ -177,28 +222,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="step-bar">
     <div class="step-item active" id="si1"><div class="step-dot">1</div><span>Horario</span></div>
     <div class="step-line"></div>
-    <div class="step-item" id="si2"><div class="step-dot">2</div><span>Datos</span></div>
+    <div class="step-item" id="si2"><div class="step-dot">2</div><span>Motivo</span></div>
     <div class="step-line"></div>
-    <div class="step-item" id="si3"><div class="step-dot">3</div><span>Confirmación</span></div>
+    <div class="step-item" id="si3"><div class="step-dot">3</div><span>Listo</span></div>
   </div>
   <div class="scroll-area">
     <div id="pstep-1" class="pstep active">
       <div class="section-title">Seleccioná un horario disponible</div>
       <p style="font-size:13px;color:#0096C7;margin-bottom:14px">Clínica Dra. Belkis Suisse</p>
-      <div class="horarios-grid" id="horarios-grid"></div>
+      <div class="horarios-grid" id="horarios-grid"><div class="loading">Cargando horarios...</div></div>
       <p id="slot-err" style="font-size:12px;color:#c0392b;display:none;margin-bottom:10px">Por favor seleccioná un horario.</p>
       <button class="btn-primary" onclick="irPaso2()">Continuar &rarr;</button>
     </div>
     <div id="pstep-2" class="pstep">
       <div id="slot-resumen" class="slot-resumen"></div>
-      <div class="section-title">Confirmá tus datos</div>
-      <div class="form-group"><label>Nombre completo</label><input type="text" id="cf-nombre" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
-      <div class="form-group"><label>Número de identidad</label><input type="text" id="cf-id" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
+      <div class="section-title">Tus datos y motivo de consulta</div>
+      <div class="form-group"><label>Nombre</label><input type="text" id="cf-nombre" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
+      <div class="form-group"><label>Identidad</label><input type="text" id="cf-id" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
       <div class="form-group"><label>Edad</label><input type="text" id="cf-edad" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
       <div class="form-group"><label>Teléfono</label><input type="text" id="cf-tel" readonly style="background:#f0f9ff;color:#0077B6;font-weight:600"></div>
-      <div class="form-group"><label>Motivo de consulta</label><textarea id="cf-motivo" placeholder="Ej: Dolor de muela, limpieza, revisión..."></textarea></div>
+      <div class="form-group">
+        <label>Motivo o síntomas ✏️</label>
+        <textarea id="cf-motivo" placeholder="Describí tu motivo o síntomas. Ej: Tengo dolor en la muela del juicio desde hace 3 días..."></textarea>
+      </div>
       <p id="motivo-err" style="font-size:12px;color:#c0392b;display:none;margin-bottom:10px">Por favor describí el motivo de tu consulta.</p>
-      <button class="btn-primary" onclick="enviarSolicitud()">Enviar solicitud</button>
+      <button class="btn-primary" id="btn-enviar" onclick="enviarSolicitud()">Enviar solicitud</button>
       <button class="btn-secondary" onclick="irPaso1()">&larr; Cambiar horario</button>
     </div>
     <div id="pstep-3" class="pstep">
@@ -210,70 +258,313 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="confirm-sub">Tu cita está pendiente de confirmación por la doctora.</div>
         <div class="confirm-detail" id="confirm-detail"></div>
       </div>
-      <button class="btn-primary" style="margin-top:16px" onclick="nuevaCita()">Agendar otra cita</button>
-      <button class="btn-secondary" style="margin-top:8px" onclick="verEstadoCita()">&#128269; Ver estado de mi cita</button>
+      <div style="background:#f0f9ff;border-radius:12px;padding:14px;margin-top:16px;font-size:13px;color:#0077B6;text-align:center">
+        <strong>¿Querés saber si te confirmaron?</strong><br>
+        <span style="color:#0096C7">Entrá de nuevo → "Ver estado de mi cita" → tu número de identidad</span>
+      </div>
+      <button class="btn-primary" style="margin-top:12px" onclick="nuevaCita()">Agendar otra cita</button>
+      <button class="btn-secondary" onclick="logout()">Salir</button>
     </div>
   </div>
 </div>
-<div id="screen-estado" class="screen">
-  <div class="topbar">
-    <div class="topbar-logo">
-      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 5 8 13 8 13s8-8 8-13c0-4-4-7-8-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg>
-      <h1>DentaAgenda</h1>
-    </div>
-    <button class="btn-logout" onclick="showScreen('login')">Salir</button>
-  </div>
-  <div class="scroll-area">
-    <div class="section-title">Estado de tu cita</div>
-    <div class="form-group">
-      <label>Ingresá tu número de identidad</label>
-      <input type="text" id="estado-id" placeholder="Ej: 0801-1990-12345">
-    </div>
-    <button class="btn-primary" onclick="buscarEstado()">Consultar</button>
-    <div id="estado-resultado" style="margin-top:16px"></div>
-    <button class="btn-secondary" style="margin-top:12px" onclick="showScreen('paciente')">&#8592; Volver</button>
-  </div>
 </div>
-</div>
+
 <script>
-const SLOTS_BASE=['8:00','8:45','9:30','10:15','11:00','11:45','1:00 PM','1:45 PM','2:00 PM','2:45 PM','3:30 PM','4:15 PM'];
-const CITAS_INIT=[{id:1,hora:'8:00',nombre:'Ana Rodríguez',motivo:'Limpieza dental',estado:'atendida'},{id:2,hora:'8:45',nombre:'Carlos Mejía',motivo:'Extracción muela del juicio',estado:'confirmada'},{id:3,hora:'9:30',nombre:'Laura Paz',motivo:'Revisión general',estado:'confirmada'},{id:4,hora:'10:15',nombre:'José Reyes',motivo:'Dolor de muela',estado:'confirmada'},{id:5,hora:'11:00',nombre:'María Santos',motivo:'Ortodoncia',estado:'confirmada'},{id:6,hora:'11:45',nombre:'Pedro Flores',motivo:'Empaste',estado:'cancelada'}];
-const PENDIENTES_INIT=[{id:7,hora:'2:00 PM',nombre:'Sofía Núñez',tel:'9812-3456',motivo:'Blanqueamiento dental'},{id:8,hora:'3:00 PM',nombre:'Diego Castro',tel:'9734-5678',motivo:'Revisión de brackets'}];
-const EXPEDIENTES_INIT=[{nombre:'Ana Rodríguez',id:'0801-1995-11223',edad:29,tel:'9876-0001',visitas:3,ultima:'15 may 2026',nota:'Limpieza cada 6 meses. Sin alergias conocidas.'},{nombre:'Carlos Mejía',id:'0801-1988-44556',edad:36,tel:'9876-0002',visitas:5,ultima:'10 abr 2026',nota:'Extracción muela del juicio pendiente lado derecho.'},{nombre:'Laura Paz',id:'0801-2000-78901',edad:26,tel:'9876-0003',visitas:2,ultima:'2 mar 2026',nota:'Paciente nueva. Revisión general programada.'},{nombre:'José Reyes',id:'0801-1982-33445',edad:42,tel:'9876-0004',visitas:7,ultima:'28 ene 2026',nota:'Tratamiento de conducto completado. Seguimiento mensual.'}];
-function cargarDatos(){if(!localStorage.getItem('da_citas'))localStorage.setItem('da_citas',JSON.stringify(CITAS_INIT));if(!localStorage.getItem('da_pendientes'))localStorage.setItem('da_pendientes',JSON.stringify(PENDIENTES_INIT));if(!localStorage.getItem('da_expedientes'))localStorage.setItem('da_expedientes',JSON.stringify(EXPEDIENTES_INIT));}
-function getCitas(){return JSON.parse(localStorage.getItem('da_citas')||'[]');}
-function getPendientes(){return JSON.parse(localStorage.getItem('da_pendientes')||'[]');}
-function getExpedientes(){return JSON.parse(localStorage.getItem('da_expedientes')||'[]');}
-function saveCitas(d){localStorage.setItem('da_citas',JSON.stringify(d));}
-function savePendientes(d){localStorage.setItem('da_pendientes',JSON.stringify(d));}
-function saveExpedientes(d){localStorage.setItem('da_expedientes',JSON.stringify(d));}
-function getSlotsLibres(){const citas=getCitas(),pendientes=getPendientes(),ocupadas=new Set([...citas.filter(c=>c.estado!=='cancelada').map(c=>c.hora),...pendientes.map(p=>p.hora)]);return SLOTS_BASE.map(h=>({hora:h,libre:!ocupadas.has(h)}));}
-let slotSel=null,pacienteData={};
-function mostrarNotif(msg){const n=document.getElementById('notif');n.textContent=msg;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2500);}
-function setRole(r){document.querySelectorAll('.role-tab').forEach((b,i)=>b.classList.toggle('active',(i===0&&r==='doctora')||(i===1&&r==='paciente')));document.getElementById('login-doctora').classList.toggle('active',r==='doctora');document.getElementById('login-paciente').classList.toggle('active',r==='paciente');document.getElementById('form-error').style.display='none';}
+const SB_URL = 'https://aivhrpvorvnoylbqkuqy.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFpdmhycHZvcnZub3lsYnFrdXF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNjc1NjksImV4cCI6MjA5Njk0MzU2OX0.B4ZNMwy-qGMZkX7-OdBfOCC1lcIZfxgOrGcEufj5xNw';
+const SLOTS_BASE = ['8:00','8:45','9:30','10:15','11:00','11:45','1:00 PM','1:45 PM','2:00 PM','2:45 PM','3:30 PM','4:15 PM'];
+
+// Usuario doctora mapeado a correo real
+const DOCTORA_USUARIO = 'belki.den';
+const DOCTORA_EMAIL = 'belki.den@dentaagenda.com';
+const DOCTORA_PASS = 'dental123';
+
+let slotSel = null;
+let pacienteData = {};
+let allExpedientes = [];
+
+async function sbGet(tabla, query=''){
+  const res = await fetch(`${SB_URL}/rest/v1/${tabla}?${query}`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}});
+  return await res.json();
+}
+async function sbPost(tabla, body){
+  const res = await fetch(`${SB_URL}/rest/v1/${tabla}`,{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'},body:JSON.stringify(body)});
+  return {ok:res.ok,data:await res.json()};
+}
+async function sbPatch(tabla, query, body){
+  const res = await fetch(`${SB_URL}/rest/v1/${tabla}?${query}`,{method:'PATCH',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  return res.ok;
+}
+async function authLogin(email, pass){
+  const res = await fetch(`${SB_URL}/auth/v1/token?grant_type=password`,{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password:pass})});
+  return await res.json();
+}
+
+function notif(msg){const n=document.getElementById('notif');n.textContent=msg;n.classList.add('show');setTimeout(()=>n.classList.remove('show'),2500);}
 function showError(msg){const e=document.getElementById('form-error');e.textContent=msg;e.style.display='block';}
-function loginDoctora(){const u=document.getElementById('d-user').value.trim(),p=document.getElementById('d-pass').value.trim();if(u==='dra.belkis'&&p==='dental123'){showScreen('doctora');renderCitas();renderPendientes();renderExpedientes();}else{showError('Usuario o contraseña incorrectos.');}}
-function loginPaciente(){const n=document.getElementById('p-reg-nombre').value.trim(),i=document.getElementById('p-reg-id').value.trim(),e=document.getElementById('p-reg-edad').value.trim(),t=document.getElementById('p-reg-tel').value.trim();if(!n||!i||!e||!t){showError('Por favor completá todos los campos.');return;}pacienteData={nombre:n,id:i,edad:e,tel:t};showScreen('paciente');slotSel=null;renderSlots();document.getElementById('cf-nombre').value=n;document.getElementById('cf-id').value=i;document.getElementById('cf-edad').value=e;document.getElementById('cf-tel').value=t;document.getElementById('cf-motivo').value='';setPaso(1);}
+function hideError(){document.getElementById('form-error').style.display='none';}
 function showScreen(s){document.querySelectorAll('.screen').forEach(el=>el.classList.remove('active'));document.getElementById('screen-'+s).classList.add('active');}
-function logout(){document.getElementById('d-user').value='';document.getElementById('d-pass').value='';['p-reg-nombre','p-reg-id','p-reg-edad','p-reg-tel'].forEach(id=>document.getElementById(id).value='');document.getElementById('form-error').style.display='none';showScreen('login');}
-function switchTab(t){document.querySelectorAll('.tab-panel').forEach(el=>el.classList.remove('active'));document.getElementById('tab-'+t).classList.add('active');document.querySelectorAll('.nav-switch button').forEach((b,i)=>b.classList.toggle('active',['hoy','pendientes','expedientes'][i]===t));}
 function labelEstado(e){return{pendiente:'Pendiente',confirmada:'Confirmada',atendida:'Atendida',cancelada:'Cancelada',nopresento:'No se presentó'}[e]||e;}
-function renderCitas(){const CITAS=getCitas(),conf=CITAS.filter(c=>c.estado==='confirmada').length,atend=CITAS.filter(c=>c.estado==='atendida').length,canc=CITAS.filter(c=>c.estado==='cancelada').length;document.getElementById('stats-grid').innerHTML=`<div class="stat"><div class="num">${CITAS.length}</div><div class="lbl">Citas hoy</div></div><div class="stat"><div class="num" style="color:#0077B6">${conf}</div><div class="lbl">Confirmadas</div></div><div class="stat"><div class="num" style="color:#065f46">${atend}</div><div class="lbl">Atendidas</div></div><div class="stat"><div class="num" style="color:#991b1b">${canc}</div><div class="lbl">Canceladas</div></div>`;const sorted=CITAS.slice().sort((a,b)=>SLOTS_BASE.indexOf(a.hora)-SLOTS_BASE.indexOf(b.hora));document.getElementById('citas-lista').innerHTML=sorted.map(c=>`<div class="cita-row"><div class="hora-badge">${c.hora}</div><div class="cita-info"><div class="cita-nombre">${c.nombre}</div><div class="cita-motivo">${c.motivo}</div>${c.estado==='confirmada'||c.estado==='pendiente'?`<div class="action-btns"><button class="btn-sm btn-atendida" onclick="cambiarEstado(${c.id},'atendida')">✓ Atendida</button><button class="btn-sm btn-nopresento" onclick="cambiarEstado(${c.id},'nopresento')">No se presentó</button></div>`:''}</div><span class="badge ${c.estado==='nopresento'?'nopresento':c.estado}">${labelEstado(c.estado)}</span></div>`).join('');}
-function cambiarEstado(id,nuevo){const CITAS=getCitas(),c=CITAS.find(x=>x.id===id);if(c){c.estado=nuevo;saveCitas(CITAS);renderCitas();}}
-function renderPendientes(){const PENDIENTES=getPendientes(),el=document.getElementById('pendientes-lista'),pc=document.getElementById('pend-count');pc.textContent=PENDIENTES.length||'';pc.style.display=PENDIENTES.length?'inline':'none';if(!PENDIENTES.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">✓</div><p>Sin solicitudes pendientes</p></div>';return;}el.innerHTML=PENDIENTES.map(p=>`<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:15px;font-weight:700;color:#03045E">${p.nombre}</div><div style="font-size:12px;color:#0096C7;margin-top:2px">${p.hora} · ${p.motivo}</div><div style="font-size:12px;color:#adb5bd">${p.tel}</div></div><span class="badge pendiente">Pendiente</span></div><div class="action-btns" style="margin-top:12px"><button class="btn-sm btn-confirmar" onclick="accionPendiente(${p.id},'confirmar')">✓ Confirmar</button><button class="btn-sm btn-rechazar" onclick="accionPendiente(${p.id},'rechazar')">✗ Rechazar</button></div></div>`).join('');}
-function accionPendiente(id,accion){const PENDIENTES=getPendientes(),CITAS=getCitas(),idx=PENDIENTES.findIndex(p=>p.id===id);if(idx>-1){if(accion==='confirmar'){const p=PENDIENTES[idx];CITAS.push({id:p.id,hora:p.hora,nombre:p.nombre,motivo:p.motivo,estado:'confirmada'});saveCitas(CITAS);renderCitas();mostrarNotif('✓ Cita confirmada — '+p.nombre);}else{mostrarNotif('Solicitud rechazada');}PENDIENTES.splice(idx,1);savePendientes(PENDIENTES);renderPendientes();}}
-function renderExpedientes(filtro=''){const EXPEDIENTES=getExpedientes(),el=document.getElementById('expedientes-lista'),lista=filtro?EXPEDIENTES.filter(e=>e.nombre.toLowerCase().includes(filtro.toLowerCase())||e.id.includes(filtro)):EXPEDIENTES;if(!lista.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><p>Paciente nuevo, sin visitas anteriores</p></div>';return;}el.innerHTML=lista.map(e=>`<div class="card"><div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div class="avatar">${e.nombre.split(' ').map(n=>n[0]).slice(0,2).join('')}</div><div><div style="font-size:15px;font-weight:700;color:#03045E">${e.nombre}</div><div style="font-size:12px;color:#0096C7">${e.edad} años · ${e.tel}</div></div></div><div class="exp-row"><span>Identidad</span><span>${e.id}</span></div><div class="exp-row"><span>Visitas</span><span>${e.visitas}</span></div><div class="exp-row"><span>Última visita</span><span>${e.ultima}</span></div><div class="exp-nota">${e.nota}</div></div>`).join('');}
-function filtrarExpedientes(v){renderExpedientes(v);}
-function renderSlots(){const slots=getSlotsLibres();document.getElementById('horarios-grid').innerHTML=slots.map((s,i)=>`<button class="slot ${s.libre?(slotSel===i?'seleccionado':'libre'):'ocupado'}" ${s.libre?`onclick="selSlot(${i})"`:'disabled'}>${s.hora}</button>`).join('');}
-function selSlot(i){slotSel=i;document.getElementById('slot-err').style.display='none';renderSlots();}
-function irPaso2(){if(slotSel===null){document.getElementById('slot-err').style.display='block';return;}const slots=getSlotsLibres();document.getElementById('slot-resumen').innerHTML=`<small>Horario seleccionado</small><strong>${slots[slotSel].hora} · Clínica Dra. Belkis Suisse</strong>`;setPaso(2);}
+
+function setRole(r){
+  document.querySelectorAll('.role-tab').forEach((b,i)=>b.classList.toggle('active',(i===0&&r==='doctora')||(i===1&&r==='paciente')));
+  document.getElementById('login-doctora').classList.toggle('active',r==='doctora');
+  document.getElementById('login-paciente').classList.toggle('active',r==='paciente');
+  document.getElementById('login-estado').classList.toggle('active',r==='estado');
+  hideError();
+}
+
+// LOGIN DOCTORA — usuario simple mapeado a correo
+async function loginDoctora(){
+  const usuario = document.getElementById('d-usuario').value.trim();
+  const pass = document.getElementById('d-pass').value.trim();
+  if(!usuario||!pass){showError('Completá todos los campos.');return;}
+  if(usuario !== DOCTORA_USUARIO){showError('Usuario o contraseña incorrectos.');return;}
+  const btn = document.getElementById('btn-doc');
+  btn.disabled=true; btn.textContent='Ingresando...';
+  hideError();
+  const res = await authLogin(DOCTORA_EMAIL, pass);
+  if(res.access_token){
+    showScreen('doctora');
+    cargarCitas();
+    cargarPendientes();
+    cargarExpedientes();
+  } else {
+    showError('Usuario o contraseña incorrectos.');
+  }
+  btn.disabled=false; btn.textContent='Ingresar';
+}
+
+// LOGIN PACIENTE — solo datos personales
+async function loginPaciente(){
+  const nombre=document.getElementById('p-nombre').value.trim();
+  const id=document.getElementById('p-id').value.trim();
+  const edad=document.getElementById('p-edad').value.trim();
+  const tel=document.getElementById('p-tel').value.trim();
+  if(!nombre||!id||!edad||!tel){showError('Por favor completá todos los campos.');return;}
+  const btn=document.getElementById('btn-pac');
+  btn.disabled=true; btn.textContent='Cargando...';
+  hideError();
+  const existentes = await sbGet('expedientes',`identidad=eq.${encodeURIComponent(id)}`);
+  if(!existentes.length){
+    await sbPost('expedientes',{nombre,identidad:id,edad:parseInt(edad),telefono:tel,visitas:0,ultima_visita:'—',notas:'Paciente nuevo.'});
+  }
+  pacienteData={nombre,id,edad,tel};
+  document.getElementById('cf-nombre').value=nombre;
+  document.getElementById('cf-id').value=id;
+  document.getElementById('cf-edad').value=edad;
+  document.getElementById('cf-tel').value=tel;
+  document.getElementById('cf-motivo').value='';
+  slotSel=null;
+  showScreen('paciente');
+  cargarSlots();
+  setPaso(1);
+  btn.disabled=false; btn.textContent='Agendar cita';
+}
+
+// CONSULTAR ESTADO CON SOLO EL ID
+async function consultarEstado(){
+  const id = document.getElementById('e-id').value.trim();
+  if(!id){showError('Por favor ingresá tu número de identidad.');return;}
+  const btn=document.getElementById('btn-estado');
+  btn.disabled=true; btn.textContent='Consultando...';
+  hideError();
+
+  const expediente = await sbGet('expedientes',`identidad=eq.${encodeURIComponent(id)}`);
+  if(!expediente.length){
+    showError('No encontramos citas con ese número de identidad.');
+    btn.disabled=false; btn.textContent='Consultar';
+    return;
+  }
+
+  const nombre = expediente[0].nombre;
+  const citas = await sbGet('citas',`nombre_paciente=eq.${encodeURIComponent(nombre)}&order=created_at.desc`);
+
+  showScreen('estado');
+  const el = document.getElementById('estado-resultado');
+
+  if(!citas.length){
+    el.innerHTML=`<div class="empty-state"><div class="empty-icon">📋</div><p>No tenés citas registradas</p></div>`;
+    btn.disabled=false; btn.textContent='Consultar';
+    return;
+  }
+
+  const colores={
+    pendiente:{bg:'#fff3cd',color:'#856404',icon:'⏳',msg:'Tu cita está pendiente de confirmación por la doctora.'},
+    confirmada:{bg:'#d0f0fd',color:'#0077B6',icon:'✅',msg:'¡Tu cita fue confirmada! Recordá llegar a tiempo.'},
+    atendida:{bg:'#d1fae5',color:'#065f46',icon:'✓',msg:'Esta cita ya fue atendida.'},
+    cancelada:{bg:'#fee2e2',color:'#991b1b',icon:'✗',msg:'Tu cita fue rechazada. Podés agendar una nueva.'},
+    nopresento:{bg:'#f3f4f6',color:'#6b7280',icon:'—',msg:'Se registró que no te presentaste a esta cita.'}
+  };
+
+  el.innerHTML = citas.map(c=>{
+    const col=colores[c.estado]||colores.pendiente;
+    return `<div class="estado-card" style="background:${col.bg};border:1.5px solid ${col.color}">
+      <div class="estado-icon">${col.icon}</div>
+      <div class="estado-titulo" style="color:${col.color}">${labelEstado(c.estado)}</div>
+      <div class="estado-msg" style="color:${col.color}">${col.msg}</div>
+      <div style="background:#fff;border-radius:10px;padding:12px;text-align:left;font-size:13px">
+        <div class="exp-row"><span>Paciente</span><span>${nombre}</span></div>
+        <div class="exp-row"><span>Horario</span><span>${c.hora}</span></div>
+        <div class="exp-row"><span>Motivo</span><span>${c.motivo||'—'}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  btn.disabled=false; btn.textContent='Consultar';
+}
+
+function logout(){
+  pacienteData={};
+  document.getElementById('d-usuario').value='';
+  document.getElementById('d-pass').value='';
+  ['p-nombre','p-id','p-edad','p-tel'].forEach(i=>document.getElementById(i).value='');
+  hideError();
+  setRole('paciente');
+  showScreen('login');
+}
+
+function switchTab(t){
+  document.querySelectorAll('.tab-panel').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.querySelectorAll('.nav-switch button').forEach((b,i)=>b.classList.toggle('active',['hoy','pendientes','expedientes'][i]===t));
+  if(t==='expedientes') cargarExpedientes();
+}
+
+async function cargarCitas(){
+  document.getElementById('citas-lista').innerHTML='<div class="loading">Cargando citas...</div>';
+  const citas=await sbGet('citas','order=hora.asc');
+  const conf=citas.filter(c=>c.estado==='confirmada').length;
+  const atend=citas.filter(c=>c.estado==='atendida').length;
+  const pend=citas.filter(c=>c.estado==='pendiente').length;
+  document.getElementById('stats-grid').innerHTML=`
+    <div class="stat"><div class="num">${citas.length}</div><div class="lbl">Citas hoy</div></div>
+    <div class="stat"><div class="num" style="color:#0077B6">${conf}</div><div class="lbl">Confirmadas</div></div>
+    <div class="stat"><div class="num" style="color:#065f46">${atend}</div><div class="lbl">Atendidas</div></div>
+    <div class="stat"><div class="num" style="color:#856404">${pend}</div><div class="lbl">Pendientes</div></div>`;
+  if(!citas.length){document.getElementById('citas-lista').innerHTML='<div class="empty-state"><div class="empty-icon">📅</div><p>Sin citas por el momento</p></div>';return;}
+  document.getElementById('citas-lista').innerHTML=citas.map(c=>`
+    <div class="card"><div class="cita-row">
+      <div class="hora-badge">${c.hora}</div>
+      <div class="cita-info">
+        <div class="cita-nombre">${c.nombre_paciente}</div>
+        <div class="cita-motivo">${c.motivo||''}</div>
+        ${c.estado==='confirmada'||c.estado==='pendiente'?`<div class="action-btns">
+          <button class="btn-sm btn-atendida" onclick="cambiarEstado(${c.id},'atendida')">✓ Atendida</button>
+          <button class="btn-sm btn-nopresento" onclick="cambiarEstado(${c.id},'nopresento')">No se presentó</button>
+        </div>`:''}
+      </div>
+      <span class="badge ${c.estado==='nopresento'?'nopresento':c.estado}">${labelEstado(c.estado)}</span>
+    </div></div>`).join('');
+}
+
+async function cambiarEstado(id,nuevo){
+  await sbPatch('citas','id=eq.'+id,{estado:nuevo});
+  notif('Estado actualizado');
+  cargarCitas();
+}
+
+async function cargarPendientes(){
+  document.getElementById('pendientes-lista').innerHTML='<div class="loading">Cargando...</div>';
+  const pendientes=await sbGet('citas','estado=eq.pendiente&order=hora.asc');
+  const pc=document.getElementById('pend-count');
+  pc.textContent=pendientes.length||'';
+  pc.style.display=pendientes.length?'inline':'none';
+  if(!pendientes.length){document.getElementById('pendientes-lista').innerHTML='<div class="empty-state"><div class="empty-icon">✓</div><p>Sin solicitudes pendientes</p></div>';return;}
+  document.getElementById('pendientes-lista').innerHTML=pendientes.map(p=>`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-size:15px;font-weight:700;color:#03045E">${p.nombre_paciente}</div>
+          <div style="font-size:12px;color:#0096C7;margin-top:2px">${p.hora} · Tel: ${p.telefono_paciente||'—'}</div>
+          <div style="font-size:12px;color:#0077B6;margin-top:4px;font-style:italic">"${p.motivo||''}"</div>
+        </div>
+        <span class="badge pendiente">Pendiente</span>
+      </div>
+      <div class="action-btns" style="margin-top:12px">
+        <button class="btn-sm btn-confirmar" onclick="accionPendiente(${p.id},'confirmada')">✓ Confirmar</button>
+        <button class="btn-sm btn-rechazar" onclick="accionPendiente(${p.id},'cancelada')">✗ Rechazar</button>
+      </div>
+    </div>`).join('');
+}
+
+async function accionPendiente(id,estado){
+  await sbPatch('citas','id=eq.'+id,{estado});
+  notif(estado==='confirmada'?'✓ Cita confirmada':'Solicitud rechazada');
+  cargarPendientes();
+  cargarCitas();
+}
+
+async function cargarExpedientes(){
+  const data=await sbGet('expedientes','order=nombre.asc');
+  allExpedientes=data||[];
+  renderExpedientes(allExpedientes);
+}
+
+function renderExpedientes(lista){
+  const el=document.getElementById('expedientes-lista');
+  if(!lista.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><p>No se encontraron pacientes</p></div>';return;}
+  el.innerHTML=lista.map(e=>`
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div class="avatar">${e.nombre.split(' ').map(n=>n[0]).slice(0,2).join('')}</div>
+        <div><div style="font-size:15px;font-weight:700;color:#03045E">${e.nombre}</div>
+        <div style="font-size:12px;color:#0096C7">${e.edad} años · ${e.telefono}</div></div>
+      </div>
+      <div class="exp-row"><span>Identidad</span><span>${e.identidad||'—'}</span></div>
+      <div class="exp-row"><span>Visitas</span><span>${e.visitas}</span></div>
+      <div class="exp-row"><span>Última visita</span><span>${e.ultima_visita||'—'}</span></div>
+      <div class="exp-nota">${e.notas||'Sin notas.'}</div>
+    </div>`).join('');
+}
+
+function filtrarExpedientes(v){
+  const f=v?allExpedientes.filter(e=>e.nombre.toLowerCase().includes(v.toLowerCase())||(e.identidad||'').includes(v)):allExpedientes;
+  renderExpedientes(f);
+}
+
+async function cargarSlots(){
+  document.getElementById('horarios-grid').innerHTML='<div class="loading">Cargando horarios...</div>';
+  const ocupadas=await sbGet('citas','estado=neq.cancelada&select=hora');
+  const horasOcupadas=new Set((ocupadas||[]).map(c=>c.hora));
+  document.getElementById('horarios-grid').innerHTML=SLOTS_BASE.map((h,i)=>{
+    const libre=!horasOcupadas.has(h);
+    return `<button class="slot ${libre?(slotSel===i?'seleccionado':'libre'):'ocupado'}" ${libre?`onclick="selSlot(${i})"`:'disabled'}>${h}</button>`;
+  }).join('');
+}
+
+function selSlot(i){slotSel=i;document.getElementById('slot-err').style.display='none';cargarSlots();}
+
+function irPaso2(){
+  if(slotSel===null){document.getElementById('slot-err').style.display='block';return;}
+  document.getElementById('slot-resumen').innerHTML=`<small>Horario seleccionado</small><strong>${SLOTS_BASE[slotSel]} · Clínica Dra. Belkis Suisse</strong>`;
+  setPaso(2);
+}
 function irPaso1(){setPaso(1);}
-function setPaso(n){[1,2,3].forEach(i=>{document.getElementById('pstep-'+i).classList.toggle('active',i===n);document.getElementById('si'+i).classList.toggle('active',i<=n);});}
-function enviarSolicitud(){const m=document.getElementById('cf-motivo').value.trim();if(!m){document.getElementById('motivo-err').style.display='block';return;}document.getElementById('motivo-err').style.display='none';const slots=getSlotsLibres(),horaElegida=slots[slotSel].hora,PENDIENTES=getPendientes(),nuevoId=Date.now();PENDIENTES.push({id:nuevoId,hora:horaElegida,nombre:pacienteData.nombre,tel:pacienteData.tel,motivo:m});savePendientes(PENDIENTES);const EXPEDIENTES=getExpedientes(),existe=EXPEDIENTES.find(e=>e.id===pacienteData.id);if(!existe){EXPEDIENTES.push({nombre:pacienteData.nombre,id:pacienteData.id,edad:parseInt(pacienteData.edad),tel:pacienteData.tel,visitas:0,ultima:'—',nota:'Paciente nuevo. Sin notas de tratamiento aún.'});saveExpedientes(EXPEDIENTES);}document.getElementById('confirm-detail').innerHTML=`<div><span>Paciente</span><span style="font-weight:600">${pacienteData.nombre}</span></div><div><span>Horario</span><span style="font-weight:600">${horaElegida}</span></div><div><span>Motivo</span><span style="font-weight:600">${m}</span></div><div><span>Estado</span><span style="color:#856404;font-weight:700;background:#fff3cd;padding:2px 8px;border-radius:8px">Pendiente de confirmación</span></div>`;setPaso(3);}
-function nuevaCita(){slotSel=null;document.getElementById('cf-motivo').value='';renderSlots();setPaso(1);}
-function verEstadoCita(){document.getElementById('estado-id').value=pacienteData.id||'';document.getElementById('estado-resultado').innerHTML='';showScreen('estado');}
-function buscarEstado(){const idBuscado=document.getElementById('estado-id').value.trim();if(!idBuscado){document.getElementById('estado-resultado').innerHTML='<p style="font-size:13px;color:#c0392b;margin-top:8px">Por favor ingresá tu número de identidad.</p>';return;}const exp=getExpedientes().find(e=>e.id===idBuscado);if(!exp){document.getElementById('estado-resultado').innerHTML='<div class="card" style="text-align:center;padding:24px"><div style="font-size:32px;margin-bottom:8px">🔍</div><div style="font-size:14px;color:#0096C7;font-weight:600">No encontramos citas para ese número.</div><div style="font-size:12px;color:#adb5bd;margin-top:4px">Verificá el número o agendá una nueva cita.</div></div>';return;}const nombre=exp.nombre,PENDIENTES=getPendientes(),CITAS=getCitas(),pendiente=PENDIENTES.find(p=>p.nombre===nombre),cita=CITAS.find(c=>c.nombre===nombre&&c.estado!=='atendida'&&c.estado!=='cancelada'&&c.estado!=='nopresento'),item=cita||pendiente;if(!item){document.getElementById('estado-resultado').innerHTML='<div class="card" style="text-align:center;padding:24px"><div style="font-size:32px;margin-bottom:8px">📋</div><div style="font-size:14px;color:#0096C7;font-weight:600">No tenés citas activas en este momento.</div></div>';return;}const estado=cita?cita.estado:'pendiente',colores={pendiente:{bg:'#fff3cd',color:'#856404',icon:'⏳',msg:'Tu cita está pendiente de confirmación por la doctora.'},confirmada:{bg:'#d0f0fd',color:'#0077B6',icon:'✅',msg:'¡Tu cita fue confirmada! Recordá llegar a tiempo.'},atendida:{bg:'#d1fae5',color:'#065f46',icon:'✓',msg:'Esta cita ya fue atendida.'},cancelada:{bg:'#fee2e2',color:'#991b1b',icon:'✗',msg:'Esta cita fue cancelada.'},nopresento:{bg:'#f3f4f6',color:'#6b7280',icon:'—',msg:'Se registró que no te presentaste.'}},c=colores[estado]||colores.pendiente;document.getElementById('estado-resultado').innerHTML=`<div class="card"><div style="text-align:center;padding:12px 0 16px"><div style="font-size:36px;margin-bottom:8px">${c.icon}</div><div style="font-size:16px;font-weight:700;color:${c.color}">${labelEstado(estado)}</div><div style="font-size:12px;color:#0096C7;margin-top:4px">${c.msg}</div></div><div style="background:${c.bg};border-radius:10px;padding:12px"><div class="exp-row"><span>Paciente</span><span>${item.nombre}</span></div><div class="exp-row"><span>Horario</span><span>${item.hora}</span></div><div class="exp-row"><span>Motivo</span><span>${item.motivo}</span></div><div class="exp-row"><span>Estado</span><span style="color:${c.color};font-weight:700">${labelEstado(estado)}</span></div></div></div>`;}
-cargarDatos();
+function setPaso(n){[1,2,3].forEach(i=>{const p=document.getElementById('pstep-'+i);if(p)p.classList.toggle('active',i===n);const s=document.getElementById('si'+i);if(s)s.classList.toggle('active',i<=n);});}
+
+async function enviarSolicitud(){
+  const motivo=document.getElementById('cf-motivo').value.trim();
+  if(!motivo){document.getElementById('motivo-err').style.display='block';return;}
+  document.getElementById('motivo-err').style.display='none';
+  const btn=document.getElementById('btn-enviar');
+  btn.disabled=true; btn.textContent='Enviando...';
+  const hora=SLOTS_BASE[slotSel];
+  const {ok}=await sbPost('citas',{nombre_paciente:pacienteData.nombre,telefono_paciente:pacienteData.tel,hora,motivo,estado:'pendiente'});
+  if(ok){
+    document.getElementById('confirm-detail').innerHTML=`
+      <div><span>Paciente</span><span style="font-weight:600">${pacienteData.nombre}</span></div>
+      <div><span>Horario</span><span style="font-weight:600">${hora}</span></div>
+      <div><span>Motivo</span><span style="font-weight:600">${motivo}</span></div>
+      <div><span>Estado</span><span style="color:#856404;font-weight:700;background:#fff3cd;padding:2px 8px;border-radius:8px">Pendiente de confirmación</span></div>`;
+    setPaso(3);
+  } else {
+    notif('Error al enviar. Intentá de nuevo.');
+  }
+  btn.disabled=false; btn.textContent='Enviar solicitud';
+}
+
+function nuevaCita(){slotSel=null;document.getElementById('cf-motivo').value='';cargarSlots();setPaso(1);}
 </script>
 </body>
 </html>
