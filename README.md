@@ -34,7 +34,7 @@ Estructura del proyecto:
 DentaAgenda/
 ├── index.html      ← Aplicación completa (HTML + CSS + JS)
 ├── README.md       ← Descripción del proyecto
-└── PLAN.md         ← Plan y diseño del sistema
+
 
 Cómo usar
 
