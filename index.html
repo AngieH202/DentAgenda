@@ -151,6 +151,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .trat-tag{padding:6px 12px;border:1.5px solid #cae5f5;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;color:#0077B6;background:#f8fbff;transition:all .2s}
 .trat-tag.sel{background:linear-gradient(135deg,#0077B6,#00B4D8);color:#fff;border-color:transparent}
 .tag-group-title{font-size:11px;color:#0096C7;font-weight:600;margin-bottom:6px;margin-top:4px}
+/* SELECTOR DE DÍAS */
+.semana-titulo{font-size:12px;color:#0096C7;font-weight:600;text-align:center;margin-bottom:10px;letter-spacing:.3px}
+.dias-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:18px}
+.dia-btn{padding:10px 4px;border:1.5px solid #cae5f5;border-radius:10px;text-align:center;cursor:pointer;background:#f8fbff;transition:all .2s;font-family:inherit}
+.dia-btn .dia-nombre{font-size:11px;font-weight:600;color:#0096C7;text-transform:uppercase;letter-spacing:.5px}
+.dia-btn .dia-num{font-size:18px;font-weight:700;color:#03045E;margin:2px 0}
+.dia-btn .dia-mes{font-size:10px;color:#adb5bd}
+.dia-btn.activo{background:linear-gradient(135deg,#0077B6,#00B4D8);border-color:transparent}
+.dia-btn.activo .dia-nombre,.dia-btn.activo .dia-num,.dia-btn.activo .dia-mes{color:#fff}
+.dia-btn.pasado{background:#f3f4f6;border-color:#e9ecef;cursor:not-allowed;opacity:.5}
+.dia-btn.pasado .dia-nombre,.dia-btn.pasado .dia-num,.dia-btn.pasado .dia-mes{color:#adb5bd}
+.dia-btn:not(.pasado):not(.activo):hover{border-color:#0077B6;background:#e0f4fb}
+.horarios-titulo{font-size:12px;color:#0096C7;font-weight:600;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -354,7 +367,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div id="pstep-1" class="pstep active">
       <div class="section-title">Seleccioná un horario disponible</div>
       <p style="font-size:13px;color:#0096C7;margin-bottom:14px">Clínica Dra. Belkis Suisse</p>
-      <div class="horarios-grid" id="horarios-grid"><div class="loading">Cargando horarios...</div></div>
+      <div class="semana-titulo" id="semana-label"></div>
+      <div class="dias-grid" id="dias-grid"></div>
+      <div class="horarios-titulo" id="horarios-titulo" style="display:none">Horarios disponibles para el día seleccionado</div>
+      <div class="horarios-grid" id="horarios-grid"></div>
       <p id="slot-err" style="font-size:12px;color:#c0392b;display:none;margin-bottom:10px">Por favor seleccioná un horario.</p>
       <button class="btn-primary" onclick="irPaso2()">Continuar &rarr;</button>
     </div>
@@ -405,7 +421,7 @@ const SLOTS_BASE=[
 
 const DOCTORA_USUARIO='belki.den';
 const DOCTORA_EMAIL='belki.den@dentaagenda.com';
-let slotSel=null,pacienteData={},allExpedientes=[],expedienteActual=null;
+let slotSel=null,diaSel=null,pacienteData={},allExpedientes=[],expedienteActual=null;
 
 /* TOGGLE CONTRASEÑA */
 function togglePassword(){
@@ -490,7 +506,7 @@ async function loginPaciente(){
   document.getElementById('cf-edad').value=edad;
   document.getElementById('cf-tel').value=tel;
   document.getElementById('cf-motivo').value='';
-  slotSel=null;showScreen('paciente');cargarSlots();setPaso(1);
+  slotSel=null;diaSel=null;showScreen('paciente');renderDias();document.getElementById('horarios-titulo').style.display='none';document.getElementById('horarios-grid').innerHTML='';setPaso(1);
   btn.disabled=false;btn.textContent='Agendar cita';
 }
 
@@ -785,22 +801,98 @@ async function guardarDiagnostico(){
   btn.disabled=false;btn.textContent='Guardar registro de visita';
 }
 
-/* SLOTS PACIENTE */
-async function cargarSlots(){
-  document.getElementById('horarios-grid').innerHTML='<div class="loading">Cargando horarios...</div>';
-  const ocupadas=await sbGet('citas','estado=neq.cancelada&select=hora');
-  const horasOcupadas=new Set((ocupadas||[]).map(c=>c.hora));
-  document.getElementById('horarios-grid').innerHTML=SLOTS_BASE.map((h,i)=>{
-    const libre=!horasOcupadas.has(h);
-    return`<button class="slot ${libre?(slotSel===i?'seleccionado':'libre'):'ocupado'}" ${libre?`onclick="selSlot(${i})"`:' disabled'}>${h}</button>`;
+/* SEMANA Y SLOTS */
+function getDiasSemana(){
+  const hoy=new Date();
+  hoy.setHours(0,0,0,0);
+  // Encontrar el lunes de esta semana
+  const dow=hoy.getDay(); // 0=dom,1=lun,...
+  const diffLunes=dow===0?-6:1-dow;
+  const lunes=new Date(hoy);
+  lunes.setDate(hoy.getDate()+diffLunes);
+  const nombres=['Lun','Mar','Mié','Jue','Vie'];
+  const dias=[];
+  for(let i=0;i<5;i++){
+    const d=new Date(lunes);
+    d.setDate(lunes.getDate()+i);
+    const iso=d.toISOString().slice(0,10);
+    const label=d.toLocaleDateString('es-HN',{day:'numeric',month:'short'});
+    const labelLargo=d.toLocaleDateString('es-HN',{weekday:'long',day:'numeric',month:'long'});
+    dias.push({nombre:nombres[i],dia:d.getDate(),mes:label.split(' ')[1]||'',isoDate:iso,labelLargo,date:d});
+  }
+  return dias;
+}
+
+function renderDias(){
+  const hoy=new Date();hoy.setHours(0,0,0,0);
+  const dias=getDiasSemana();
+  const lunes=dias[0].date;
+  const viernes=dias[4].date;
+  const mesLabel=lunes.toLocaleDateString('es-HN',{month:'long',year:'numeric'});
+  document.getElementById('semana-label').textContent='Semana del '+lunes.getDate()+' al '+viernes.getDate()+' de '+mesLabel;
+  document.getElementById('dias-grid').innerHTML=dias.map((d,i)=>{
+    const pasado=d.date<hoy;
+    const seleccionado=diaSel&&diaSel.isoDate===d.isoDate;
+    let cls='dia-btn';
+    if(pasado)cls+=' pasado';
+    else if(seleccionado)cls+=' activo';
+    return`<button class="${cls}" ${pasado?'disabled':''} onclick="${pasado?'':'selDia(\''+d.isoDate+'\')'}"}>
+      <div class="dia-nombre">${d.nombre}</div>
+      <div class="dia-num">${d.dia}</div>
+      <div class="dia-mes">${d.mes}</div>
+    </button>`;
   }).join('');
 }
+
+function selDia(isoDate){
+  const dias=getDiasSemana();
+  diaSel=dias.find(d=>d.isoDate===isoDate)||null;
+  slotSel=null;
+  renderDias();
+  if(diaSel){
+    document.getElementById('horarios-titulo').style.display='block';
+    cargarSlots();
+  }else{
+    document.getElementById('horarios-titulo').style.display='none';
+    document.getElementById('horarios-grid').innerHTML='';
+  }
+}
+
+async function cargarSlots(){
+  if(!diaSel){document.getElementById('horarios-grid').innerHTML='';return;}
+  document.getElementById('horarios-grid').innerHTML='<div class="loading">Cargando horarios...</div>';
+  const hoy=new Date();
+  const esHoy=diaSel.isoDate===hoy.toISOString().slice(0,10);
+  const horaActualMin=hoy.getHours()*60+hoy.getMinutes();
+  // Parsear hora tipo "7:00 AM" a minutos
+  function parsearHoraMin(h){
+    const [time,ampm]=h.split(' ');
+    let [hr,min]=time.split(':').map(Number);
+    if(ampm==='PM'&&hr!==12)hr+=12;
+    if(ampm==='AM'&&hr===12)hr=0;
+    return hr*60+min;
+  }
+  const ocupadas=await sbGet('citas',`estado=neq.cancelada&fecha=eq.${diaSel.isoDate}&select=hora`);
+  const horasOcupadas=new Set((ocupadas||[]).map(c=>c.hora));
+  document.getElementById('horarios-grid').innerHTML=SLOTS_BASE.map((h,i)=>{
+    const pasadoHoy=esHoy&&parsearHoraMin(h)<=horaActualMin;
+    const ocupado=horasOcupadas.has(h);
+    const noDisp=pasadoHoy||ocupado;
+    const seleccionado=slotSel===i;
+    return`<button class="slot ${noDisp?'ocupado':(seleccionado?'seleccionado':'libre')}" ${noDisp?'disabled':''} ${!noDisp?`onclick="selSlot(${i})"`:''}>
+      ${h}${pasadoHoy&&!ocupado?'<br><span style="font-size:9px;opacity:.7">Pasó</span>':''}
+    </button>`;
+  }).join('');
+}
+
+function selDiaYSlots(isoDate){selDia(isoDate);}
 
 function selSlot(i){slotSel=i;document.getElementById('slot-err').style.display='none';cargarSlots();}
 
 function irPaso2(){
-  if(slotSel===null){document.getElementById('slot-err').style.display='block';return;}
-  document.getElementById('slot-resumen').innerHTML=`<small>Horario seleccionado</small><strong>${SLOTS_BASE[slotSel]} · Clínica Dra. Belkis Suisse</strong>`;
+  if(!diaSel||slotSel===null){document.getElementById('slot-err').style.display='block';document.getElementById('slot-err').textContent=!diaSel?'Por favor seleccioná un día.':'Por favor seleccioná un horario.';return;}
+  const diaLabel=diaSel?diaSel.labelLargo:'';
+  document.getElementById('slot-resumen').innerHTML=`<small>Horario seleccionado</small><strong>${diaLabel} · ${SLOTS_BASE[slotSel]} · Clínica Dra. Belkis Suisse</strong>`;
   setPaso(2);
 }
 
@@ -815,10 +907,13 @@ async function enviarSolicitud(){
   const btn=document.getElementById('btn-enviar');
   btn.disabled=true;btn.textContent='Enviando...';
   const hora=SLOTS_BASE[slotSel];
-  const{ok}=await sbPost('citas',{nombre_paciente:pacienteData.nombre,telefono_paciente:pacienteData.tel,hora,motivo,estado:'pendiente'});
+  const fecha=diaSel?diaSel.isoDate:'';
+  const{ok}=await sbPost('citas',{nombre_paciente:pacienteData.nombre,telefono_paciente:pacienteData.tel,hora,fecha,motivo,estado:'pendiente'});
   if(ok){
+    const diaConfirm=diaSel?diaSel.labelLargo:'';
     document.getElementById('confirm-detail').innerHTML=`
       <div><span>Paciente</span><span style="font-weight:600">${pacienteData.nombre}</span></div>
+      <div><span>Fecha</span><span style="font-weight:600">${diaConfirm}</span></div>
       <div><span>Horario</span><span style="font-weight:600">${hora}</span></div>
       <div><span>Motivo</span><span style="font-weight:600">${motivo}</span></div>
       <div><span>Estado</span><span style="color:#856404;font-weight:700;background:#fff3cd;padding:2px 8px;border-radius:8px">Pendiente de confirmación</span></div>`;
@@ -827,7 +922,7 @@ async function enviarSolicitud(){
   btn.disabled=false;btn.textContent='Enviar solicitud';
 }
 
-function nuevaCita(){slotSel=null;document.getElementById('cf-motivo').value='';cargarSlots();setPaso(1);}
+function nuevaCita(){slotSel=null;diaSel=null;document.getElementById('cf-motivo').value='';renderDias();document.getElementById('horarios-titulo').style.display='none';document.getElementById('horarios-grid').innerHTML='';setPaso(1);}
 </script>
 </body>
 </html>
